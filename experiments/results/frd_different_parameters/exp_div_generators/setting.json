@@ -1,0 +1,132 @@
+{
+  "device": "auto",
+  "num_workers": 4,
+  "batch_size": 64,
+  "num_trys": 1,
+
+  "discretizer_params": {
+    "grid_size": 64,
+    "x_min": -1,
+    "x_max": 1,
+    "y_min": -1,
+    "y_max": 1,
+    "valid_indicator": 1.0
+  },
+
+  "reference_generators": [
+    {
+      "lambda_lines_2d": 10,
+      "lambda_points_line_2d": 20,
+      "lambda_clutter": 50
+    }
+  ],
+
+  "comparison_generators": [
+    {
+      "lambda_lines_2d": 20,
+      "lambda_points_line_2d": 10,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_lines_2d": 10,
+      "lambda_points_line_2d": 20,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_lines_2d": 5,
+      "lambda_points_line_2d": 40,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_lines_2d": 25,
+      "lambda_points_line_2d": 8,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_lines_2d": 8,
+      "lambda_points_line_2d": 25,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_rect_outline_2d": 20,
+      "lambda_points_rect_outline_2d": 10,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_rect_outline_2d": 10,
+      "lambda_points_rect_outline_2d": 20,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_rect_outline_2d": 5,
+      "lambda_points_rect_outline_2d": 40,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_rect_outline_2d": 25,
+      "lambda_points_rect_outline_2d": 8,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_rect_outline_2d": 8,
+      "lambda_points_rect_outline_2d": 25,
+      "lambda_clutter": 50
+    },
+
+    {
+      "lambda_circle": 20,
+      "lambda_points_circle": 10,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_circle": 10,
+      "lambda_points_circle": 20,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_circle": 5,
+      "lambda_points_circle": 40,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_circle": 25,
+      "lambda_points_circle": 8,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_circle": 8,
+      "lambda_points_circle": 25,
+      "lambda_clutter": 50
+    },
+
+    {
+      "lambda_rectangle_2d": 20,
+      "lambda_points_rectangle_2d": 10,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_rectangle_2d": 10,
+      "lambda_points_rectangle_2d": 20,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_rectangle_2d": 5,
+      "lambda_points_rectangle_2d": 40,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_rectangle_2d": 25,
+      "lambda_points_rectangle_2d": 8,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_rectangle_2d": 8,
+      "lambda_points_rectangle_2d": 25,
+      "lambda_clutter": 50
+    }
+  ],
+
+  "random_projection_dims": [256, 512, 1024, 2048, 4096],
+
+  "sample_sizes": [256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
+}  

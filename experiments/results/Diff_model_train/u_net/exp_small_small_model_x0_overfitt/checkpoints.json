@@ -1,0 +1,8 @@
+{
+  "data_gen_idx": 0,
+  "training_stage_idx": 20,
+  "fid_calc_idx": 20,
+  "completed_samples": 0,
+  "trained_batches": 230000,
+  "model_checkpoint_path": "./experiments/results/U_Net_diff_model_train/exp_small_small_model_x0_overfitt/models/model_230000_batches.pt"
+}

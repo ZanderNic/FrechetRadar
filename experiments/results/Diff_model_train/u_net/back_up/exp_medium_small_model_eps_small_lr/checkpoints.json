@@ -1,0 +1,8 @@
+{
+  "data_gen_idx": 0,
+  "training_stage_idx": 13,
+  "fid_calc_idx": 13,
+  "completed_samples": 0,
+  "trained_batches": 320000,
+  "model_checkpoint_path": "./experiments/results/U_Net_diff_model_train/exp_middel_model_small_lr/models/model_320000_batches.pt"
+}

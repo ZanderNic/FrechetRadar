@@ -1,0 +1,36 @@
+
+{
+  "device": "auto",
+  "num_workers": 8,
+  "batch_size": 256,
+  "num_trys": 5,
+
+  "discretizer_params": {
+    "grid_size": 64,
+    "x_min": -1,
+    "x_max": 1,
+    "y_min": 0,
+    "y_max": 2,
+    "valid_indicator": 1.0
+  },
+
+  "reference_generators": [
+    {
+      "lambda_lines_2d": 10,
+      "lambda_points_line_2d": 20,
+      "lambda_clutter": 50
+    }
+  ],
+
+  "comparison_generators": [
+    {
+      "lambda_lines_2d": 10,
+      "lambda_points_line_2d": 20,
+      "lambda_clutter": 50
+    }
+  ],
+
+  "random_projection_dims": [32, 64, 128, 256, 512, 1024, 2048, 4096],
+
+  "sample_sizes": [256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072]
+}

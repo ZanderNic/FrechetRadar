@@ -1,0 +1,69 @@
+
+============================================================
+DIFFUSION MODEL SUMMARY
+============================================================
+
+Device: cuda
+Prediction Type: x0
+Schedule Type: cosine
+Time Steps: 1000
+Sinusoidal Time Embedding Dim: 256
+MLP Time Embedding Dim: 96
+EMA Enabled: True
+
+--------------------------------------------------
+Total Trainable Parameters: 717,040
+--------------------------------------------------
+
+============================================================
+Function Approximator
+============================================================
+DiT(
+  (x_embedder): PatchEmbed(
+    (proj): Conv2d(4, 96, kernel_size=(8, 8), stride=(8, 8))
+    (norm): Identity()
+  )
+  (blocks): ModuleList(
+    (0-6): 7 x TransformerBlock(
+      (norm1): LayerNorm((96,), eps=1e-06, elementwise_affine=False)
+      (attn): Attention(
+        (qkv): Linear(in_features=96, out_features=288, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (proj): Linear(in_features=96, out_features=96, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (norm2): LayerNorm((96,), eps=1e-06, elementwise_affine=False)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=96, out_features=288, bias=True)
+        (act): GELU(approximate='tanh')
+        (drop1): Dropout(p=0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=288, out_features=96, bias=True)
+        (drop2): Dropout(p=0, inplace=False)
+      )
+    )
+  )
+  (final_layer): FinalLayer(
+    (norm_final): LayerNorm((96,), eps=1e-06, elementwise_affine=False)
+    (linear): Linear(in_features=96, out_features=256, bias=True)
+  )
+)
+--------------------------------------------------
+Number of Parameters: 700,000
+--------------------------------------------------
+
+============================================================
+Time Embedding MLP
+============================================================
+Sequential(
+  (0): Linear(in_features=256, out_features=48, bias=True)
+  (1): SiLU()
+  (2): Linear(in_features=48, out_features=96, bias=True)
+)
+--------------------------------------------------
+Number of Parameters: 17,040
+--------------------------------------------------
+

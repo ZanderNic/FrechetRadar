@@ -1,0 +1,8 @@
+{
+  "data_gen_idx": 0,
+  "training_stage_idx": 30,
+  "fid_calc_idx": 30,
+  "completed_samples": 0,
+  "trained_batches": 900000,
+  "model_checkpoint_path": "./experiments/results/Diff_model_train/dit/exp_small_small_model_x0/models/model_900000_batches.pt"
+}

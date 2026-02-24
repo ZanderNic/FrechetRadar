@@ -1,0 +1,13 @@
+torch>=1.9.0
+numpy
+pandas
+matplotlib
+scipy
+joblib
+psutil
+tqdm
+statsmodels
+scikit-learn
+timm
+tensorboard
+fvcore

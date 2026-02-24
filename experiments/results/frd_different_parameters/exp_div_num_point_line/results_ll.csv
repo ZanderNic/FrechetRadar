@@ -1,0 +1,9 @@
+log_like,reference_params,comparison_params,dataset_size
+-28.953846531671346,"{'lambda_lines_2d': 10, 'lambda_points_line_2d': 20, 'lambda_clutter': 50}","{'lambda_lines_2d': 10, 'lambda_points_line_2d': 5, 'lambda_clutter': 50}",1000
+-17.392307542579985,"{'lambda_lines_2d': 10, 'lambda_points_line_2d': 20, 'lambda_clutter': 50}","{'lambda_lines_2d': 10, 'lambda_points_line_2d': 10, 'lambda_clutter': 50}",1000
+-11.532464196967567,"{'lambda_lines_2d': 10, 'lambda_points_line_2d': 20, 'lambda_clutter': 50}","{'lambda_lines_2d': 10, 'lambda_points_line_2d': 15, 'lambda_clutter': 50}",1000
+-9.94529398490181,"{'lambda_lines_2d': 10, 'lambda_points_line_2d': 20, 'lambda_clutter': 50}","{'lambda_lines_2d': 10, 'lambda_points_line_2d': 20, 'lambda_clutter': 50}",1000
+-10.009098548518395,"{'lambda_lines_2d': 10, 'lambda_points_line_2d': 20, 'lambda_clutter': 50}","{'lambda_lines_2d': 10, 'lambda_points_line_2d': 25, 'lambda_clutter': 50}",1000
+-10.750205943716828,"{'lambda_lines_2d': 10, 'lambda_points_line_2d': 20, 'lambda_clutter': 50}","{'lambda_lines_2d': 10, 'lambda_points_line_2d': 30, 'lambda_clutter': 50}",1000
+-12.296909483998025,"{'lambda_lines_2d': 10, 'lambda_points_line_2d': 20, 'lambda_clutter': 50}","{'lambda_lines_2d': 10, 'lambda_points_line_2d': 35, 'lambda_clutter': 50}",1000
+-14.104157733717805,"{'lambda_lines_2d': 10, 'lambda_points_line_2d': 20, 'lambda_clutter': 50}","{'lambda_lines_2d': 10, 'lambda_points_line_2d': 40, 'lambda_clutter': 50}",1000

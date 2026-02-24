@@ -1,0 +1,8 @@
+{
+  "data_gen_idx": 0,
+  "training_stage_idx": 6,
+  "fid_calc_idx": 6,
+  "completed_samples": 0,
+  "trained_batches": 60000,
+  "model_checkpoint_path": "./experiments/results/dit_diff_model_train/test_dit_x0/models/model_60000_batches.pt"
+}

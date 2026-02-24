@@ -1,0 +1,115 @@
+{
+  "device": "auto",
+  "num_workers": 8,
+  "batch_size": 64,
+  "num_trys": 5,
+
+  "discretizer_params": {
+    "grid_size": 64,
+    "x_min": -1,
+    "x_max": 1,
+    "y_min": -1,
+    "y_max": 1,
+    "valid_indicator": 1.0
+  },
+
+  "reference_generators": [
+    {
+      "lambda_lines_2d": 10,
+      "lambda_points_line_2d": 20,
+      "lambda_clutter": 50
+    }
+  ],
+
+  "comparison_generators": [
+    {
+      "lambda_lines_2d": 10,
+      "lambda_points_line_2d": 20,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_lines_2d": 20,
+      "lambda_points_line_2d": 10,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_lines_2d": 5,
+      "lambda_points_line_2d": 10,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_lines_2d": 10,
+      "lambda_points_line_2d": 40,
+      "lambda_clutter": 20
+    },
+    {
+      "lambda_lines_2d": 5,
+      "lambda_points_line_2d": 5,
+      "lambda_clutter": 70
+    },
+    {
+      "lambda_lines_2d": 15,
+      "lambda_points_line_2d": 25,
+      "lambda_clutter": 30
+    },
+    {
+      "lambda_lines_2d": 5,
+      "lambda_points_line_2d": 20,
+      "lambda_clutter": 40
+    },
+    {
+      "lambda_lines_2d": 8,
+      "lambda_points_line_2d": 23,
+      "lambda_clutter": 60
+    },
+    {
+      "lambda_lines_2d": 13,
+      "lambda_points_line_2d": 25,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_lines_2d": 10,
+      "lambda_points_line_2d": 5,
+      "lambda_clutter": 80
+    },
+    {
+      "lambda_lines_2d": 40,
+      "lambda_points_line_2d": 20,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_lines_2d": 8,
+      "lambda_points_line_2d": 22,
+      "lambda_clutter": 60
+    },
+    {
+      "lambda_lines_2d": 10,
+      "lambda_points_line_2d": 20,
+      "lambda_clutter": 0
+    },
+    {
+      "lambda_lines_2d": 0,
+      "lambda_points_line_2d": 0,
+      "lambda_clutter": 250
+    },
+    {
+      "lambda_lines_2d": 5,
+      "lambda_points_line_2d": 40,
+      "lambda_clutter": 50
+    },
+    {
+      "lambda_lines_2d": 13,
+      "lambda_points_line_2d": 16,
+      "lambda_clutter": 42
+    },
+    {
+      "lambda_lines_2d": 8,
+      "lambda_points_line_2d": 25,
+      "lambda_clutter": 50
+    }
+  ],
+
+  "random_projection_dims": [128, 256, 512, 1024, 2048, 4096, 5096],
+
+  "sample_sizes": [256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
+}

@@ -1,0 +1,13 @@
+=== Ranking Evaluation Summary ===
+
+Kendall:   0.5333 (p=0.003341)
+Spearman:  0.6971 (p=0.002691)
+Rank MAE:           3.0000
+Rank RMSE:          3.5882
+Pairwise accuracy:  0.7667  (concordant=92, discordant=28, ties=0)
+Inversion rate:     0.2333
+Goodman-Kruskal:  0.5333
+Pearson r (FD,NLL): 0.6376 (p=0.00788)
+Top-3  (eff=3):  precision=0.6667, recall=0.6667, F1=0.6667, intersection=2
+Top-5  (eff=5):  precision=0.6000, recall=0.6000, F1=0.6000, intersection=3
+Top-10  (eff=10):  precision=0.8000, recall=0.8000, F1=0.8000, intersection=8

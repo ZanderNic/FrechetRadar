@@ -1,0 +1,12 @@
+Trials=10, Clouds/trial=1000, Total clouds=10000
+Expected baseline (theory): -8.847222
+
+=== LL (mean per cloud) ===
+Estimated:   mean=-9.756480  std=0.047393  CI95=[-9.784010, -9.728387]
+Counts-only: mean=-35.127771  std=0.254026  CI95=[-35.264271, -34.968491]
+Δ(Estimated - Baseline):   mean=-0.909258  CI95=[-0.936582, -0.881736]
+Δ(Counts-only - Baseline): mean=-26.280549  CI95=[-26.419365, -26.118774]
+
+=== Detection (paired bootstrap across clouds) ===
+Lines → MAE=0.020800 CI95=[0.018000, 0.023700] | RMSE=0.144914 CI95=[0.134898, 0.154919] | Bias=-0.020800 CI95=[-0.023700, -0.018000] | Corr=0.998976 CI95=[0.998832, 0.999114]
+Clutter → MAE=9.115700 CI95=[9.048997, 9.179200] | RMSE=9.696118 CI95=[9.629426, 9.762200] | Bias=9.115700 CI95=[9.048997, 9.179200] | Corr=0.906325 CI95=[0.902679, 0.909843]
