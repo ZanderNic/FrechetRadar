@@ -215,11 +215,9 @@ expected and can be safely composed in the larger experiment pipelines.
 -------------------
 
 ## Acknowledgements
-A large part of this repository builds on the implementation work of Reichardt Joerg and Neuhoefer Jonas, whose contributions formed an essential foundation for several components of this project. This project was developed as part of my dual study program and within the scope of my Bachelor’s thesis at Aumovio. The support and resources provided by Aumovio, Reichardt Joerg and Neuhoefer Jonas enabled me to extend, adapt, and further develop the underlying concepts and implementation.
+This project was developed as part of my dual study program and within the scope of my Bachelor’s thesis at Aumovio. The work of Jörg Reichardt and Jonas Neuhofer, carried out in the context of the nxtAIM project, provided an essential foundation for this repository and significantly supported its development. Their prior implementation and conceptual contributions greatly facilitated the extension and refinement of several components. I would particularly like to thank Jörg Reichardt for supervising this thesis and for his continuous guidance and valuable feedback throughout the project.
 
 The implementation of the DIT (Diffusion Image Transformer) is based on the work provided at
 <https://github.com/CompVis/treadschreib>.
-
-Some parts of the documentation and several plot‑related functions were created with the support of AI‑based tools. All AI‑assisted content was thoroughly reviewed, verified, and adapted by me, and full responsibility for the final results lies with the author.
 
 I gratefully acknowledge all contributors whose prior work and support made this project possible.
