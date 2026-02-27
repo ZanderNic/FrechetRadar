@@ -6,7 +6,7 @@ The repository is structured around a clean src implementation (generators, disc
 
 ----------------------------------------------------------------
 
-## Installation :rocket: 
+## Installation
 
 Recommended workflow: create a virtual environment, activate it, and install the package in editable mode.
 
@@ -22,7 +22,7 @@ Notes:
 
 ----------------------------------------------------------------
 
-##  Source Code Overview (src/) :t-rex:
+##  Source Code Overview (src/) 
 
 ###  RadarDataGen/Data_Generator/
 
@@ -98,7 +98,7 @@ Provides streaming statistics for large-scale evaluation:
 
 ----------------------------------------------------------------
 
-## Experiments :alembic:
+## Experiments
 
 This project contains several experiment scripts that build on the core modules
 in src/ and are fully controlled via JSON configuration files. The experiments
@@ -150,7 +150,7 @@ time instead of relying solely on loss curves.
 
 ----------------------------------------------------------------
 
-## Notebooks :hammer:
+## Notebooks
 
 The repository also contains Jupyter notebooks intended for exploration and
 documentation rather than large-scale experiments.
@@ -171,7 +171,7 @@ used by the automated experiment pipelines.
 ----------------------------------------------------------------
 
 
-## Tests :test_tube:
+## Tests
 
 The repository contains a set of lightweight test scripts that validate the
 correctness and numerical behavior of some components. These tests are not
@@ -218,6 +218,6 @@ expected and can be safely composed in the larger experiment pipelines.
 This project was developed as part of my dual study program and within the scope of my Bachelor’s thesis at Aumovio. The work of Jörg Reichardt and Jonas Neuhofer, carried out in the context of the nxtAIM project, provided an essential foundation for this repository and significantly supported its development. Their prior implementation and conceptual contributions greatly facilitated the extension and refinement of several components. I would particularly like to thank Jörg Reichardt for supervising this thesis and for his continuous guidance and valuable feedback throughout the project.
 
 The implementation of the DIT (Diffusion Image Transformer) is based on the work provided at
-<https://github.com/CompVis/treadschreib>.
+https://github.com/compvis/tread .
 
 I gratefully acknowledge all contributors whose prior work and support made this project possible.
