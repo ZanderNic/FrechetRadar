@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RadarDataGen</title>
+  <meta name="description" content="Synthetic radar point clouds, diffusion models, and Fréchet Radar Distance (FRD) with random projections." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <main class="container">
+
+    <header class="header">
+      <h1 class="title">RadarDataGen: Synthetic Radar Point Clouds, Diffusion Models, and Fréchet Radar Distance (FRD)</h1>
+
+      <p class="authors">
+        Nicolas Zander · OTH Regensburg
+      </p>
+
+      <p class="meta">
+        Bachelor’s Thesis — Distribution-based evaluation for synthetic radar data.
+      </p>
+
+      <div class="links">
+        <a class="btn" href="files/thesis.pdf">Thesis in German (PDF)</a>
+        <a class="btn" href="https://github.com/ZanderNic/FrechetRadar">Code</a>
+        <a class="btn" href="#bibtex">BibTeX</a>
+      </div>
+    </header>
+
+    <section class="teaser">
+      <img src="assets/teaser.png" alt="Teaser figure" />
+      <p class="caption">
+        End-to-end pipeline: pseudo-radar point clouds > discretization > U-Net diffusion > FRD evaluation with random projections.
+      </p>
+    </section>
+
+    <section>
+      <h2>Summary</h2>
+      <p>
+        RadarDataGen is a research-oriented toolbox for generating synthetic radar point clouds, discretizing them into sparse grids,
+        training U-Net diffusion models, and evaluating distributional similarity using Fréchet Radar Distance (FRD) computed with random projections.
+        The framework supports reproducible experiments via JSON configs and streaming statistics for large-scale evaluation.
+      </p>
+    </section>
+
+    <section>
+      <h2>Abstract Thesis</h2>
+      <p>
+        The evaluation of synthetic radar data poses a central challenge in the field of generative modeling, as established quality metrics 
+        such as the Fréchet Inception Distance (FID) rely on domain-specific feature extractors and cannot be directly transferred to radar 
+        data.
+
+        This work introduces and systematically evaluates the Fréchet Radar Distance (FRD), a distribution-based similarity metric inspired 
+        by FID. Instead of using pretrained domain-specific networks, FRD employs random projections as a feature extraction mechanism, 
+        making it independent of task-specific models.
+
+        To validate FRD, a controlled experimental environment based on parametrized pseudo-radar generators is constructed. These generators 
+        allow targeted variation of statistical properties in synthetic radar point clouds. As a reference measure, an approximated 
+        log-likelihood is used to quantify the true similarity between the underlying data distributions.
+
+        Experimental results demonstrate that FRD produces consistent, reproducible, and expected evaluations in controlled settings and 
+        exhibits strong correlation with the approximated log-likelihood. These findings indicate that FRD provides a robust measure for 
+        capturing structural similarities between radar data distributions.
+
+        Building on this validation, FRD is further applied to evaluate U-Net-based diffusion models for synthetic radar data generation. 
+        Radar data is characterized by sparse occupancy, noise, and physically constrained structure, which fundamentally distinguishes it 
+        from image data. The results show that diffusion models, under idealized training conditions, are capable of reproducing these 
+        structural properties. Furthermore, the influence of model capacity is analyzed, revealing that beyond a certain model size no 
+        significant improvement in sample quality can be observed.
+      </p>
+    </section>
+
+    <section>
+      <h2>Method</h2>
+      <div class="grid2">
+        <div class="card">
+          <h3>Data Generation</h3>
+          <p>
+            Parametric pseudo-radar generators create controlled distribution shifts using geometric primitives (lines, rectangles, circles) and clutter.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Discretization</h3>
+          <p>
+            Point clouds are mapped to fixed-size grids with presence indicators and per-cell offsets; collisions are resolved via assignment.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Diffusion</h3>
+          <p>
+            U-Net diffusion models are trained on grids and evaluated by sampling and comparing against reference statistics.
+          </p>
+        </div>
+        <div class="card">
+          <h3>FRD</h3>
+          <p>
+            FRD measures distributional similarity via Gaussian statistics in randomly projected feature spaces, computed with online mean/cov updates.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Results</h2>
+      <div class="grid2">
+        <figure class="figure card">
+          <img src="assets/frd_plot.png" alt="FRD plot" />
+          <figcaption>FRD over training stages (distributional convergence).</figcaption>
+        </figure>
+        <figure class="figure card">
+          <img src="assets/samples.png" alt="Samples" />
+          <figcaption>Qualitative samples (grids / reconstructed point clouds).</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <h2>Repository</h2>
+      <ul class="bullets">
+        <li><code>src/</code> generators, discretizer, metrics (FRD), diffusion models, online statistics</li>
+        <li><code>experiments/</code> reproducible pipelines driven by JSON configs (checkpointable)</li>
+        <li><code>notebooks/</code> exploration and visualization</li>
+      </ul>
+    </section>
+
+    <section id="bibtex">
+            <h2>BibTeX</h2>
+            <pre><code>
+                @thesis{zander2026frd,
+                    title  = {Evaluierung der Fréchet-Radar-Distanz zur Bewertung synthetischer Radar-Daten},
+                    author = {Nicolas Zander},
+                    year   = {2026},
+                    type   = {Bachelor's Thesis}
+                }
+            </code></pre>
+    </section>
+
+    
+
+  </main>
+</body>
+</html>

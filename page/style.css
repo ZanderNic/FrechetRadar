@@ -1,0 +1,121 @@
+:root{
+  --bg:#0b0d10;
+  --fg:#e9eef5;
+  --muted:#b3bdc9;
+  --card:#12161d;
+  --line:#232b36;
+  --accent:#7aa2ff;
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height:1.6;
+}
+
+.container{
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 28px 18px 64px;
+}
+
+.header{ padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.title{ margin:0 0 10px; font-size: 2.05rem; line-height:1.25; }
+.authors{ margin:0; color:var(--fg); font-weight:600; }
+.meta{ margin:6px 0 0; color:var(--muted); }
+
+.links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top: 14px;
+}
+
+.btn{
+  display:inline-block;
+  padding:10px 14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  text-decoration:none;
+  color:var(--fg);
+  background: rgba(255,255,255,0.03);
+}
+.btn:hover{ border-color: var(--accent); }
+
+.teaser{
+  margin-top: 18px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px;
+}
+.teaser img{
+  width:100%;
+  display:block;
+  border-radius: 12px;
+}
+.caption{
+  margin:10px 0 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+section{ margin-top: 34px; }
+h2{ margin:0 0 10px; font-size: 1.45rem; }
+h3{ margin:0 0 6px; font-size: 1.05rem; }
+p{ margin: 0 0 10px; }
+
+.grid2{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 820px){
+  .grid2{ grid-template-columns: 1fr; }
+}
+
+.card{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px;
+}
+
+.figure{ margin:0; }
+.figure img{
+  width:100%;
+  display:block;
+  border-radius: 12px;
+}
+figcaption{
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.bullets{ margin: 0; padding-left: 18px; color: var(--fg); }
+code{
+  background: rgba(255,255,255,0.06);
+  padding: 2px 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+pre{
+  margin:0;
+  padding: 14px;
+  background: #0a0c0f;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow:auto;
+}
+.footer{
+  margin-top: 44px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+.footer a{ color: var(--fg); }
