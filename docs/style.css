@@ -22,17 +22,25 @@ body{
   padding: 28px 18px 64px;
 }
 
-.header{ padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+
+.header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: center; 
+}
+
+.links {
+  display: flex;
+  justify-content: center; 
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
 .title{ margin:0 0 10px; font-size: 2.05rem; line-height:1.25; }
 .authors{ margin:0; color:var(--fg); font-weight:600; }
 .meta{ margin:6px 0 0; color:var(--muted); }
 
-.links{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top: 14px;
-}
 
 .btn{
   display:inline-block;
