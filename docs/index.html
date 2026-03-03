@@ -1,48 +1,62 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Bachelorarbeit – Abstract, Kontext, Methode, Ergebnisse" />
-  <title>BA – Titel</title>
+  <meta name="description" content="Bachelor’s thesis page: abstract, context, method, results, and reproducibility for Fréchet Radar Distance (FRD) to evaluate synthetic radar data." />
+  <title>Thesis – Fréchet Radar Distance for Synthetic Radar Data</title>
   <link rel="stylesheet" href="static/css/style.css" />
 </head>
 
 <body>
-  <a class="skip" href="#content">Zum Inhalt springen</a>
+  <a class="skip" href="#content">Skip to content</a>
 
   <header class="header">
     <div class="wrap">
       <div class="top">
         <div class="headings">
-          <p class="kicker">Bachelorarbeit</p>
-          <h1>Titel der Arbeit</h1>
+          <p class="kicker">Bachelor’s Thesis</p>
+
+          <h1>Evaluation of Fréchet Radar Distance for Assessing Synthetic Radar Data</h1>
           <p class="sub">
-            One-liner: Problem → Methode → Ergebnis (max. 1–2 Sätze).
+            A FID-inspired distance for radar point clouds using random projections as a feature extractor,
+            validated in controlled pseudo-radar scenarios and applied to U-Net diffusion models.
           </p>
 
           <div class="meta">
-            <span><b>Autor:</b> Name</span>
-            <span><b>Institution:</b> OTH Regensburg</span>
-            <span><b>Betreuung:</b> Prof. …</span>
-            <span><b>Datum:</b> 2026</span>
+            <span><b>Author:</b> Nicolas Zander</span>
+            <span><b>Institution:</b> OTH Regensburg (Faculty of Computer Science & Mathematics)</span>
+            <span><b>Program:</b> B.Sc. Artificial Intelligence & Data Science</span>
+            <span><b>Submission date:</b> Feb 10, 2026</span>
+            <span><b>Supervisor:</b> Prof. Dr. Timo Baumann</span>
+            <span><b>Second reviewer:</b> Prof. Dr. Brijnesh Jain</span>
+            <span><b>External supervisor:</b> Dr. Jörg Reichardt (AUMOVIO Germany GmbH)</span>
+          </div>
+
+          <div class="notice">
+            <b>Note:</b> The original thesis PDF may be subject to a confidentiality notice. Publish only a
+            cleared/redacted version if required. (See repository README / legal notice.)
           </div>
         </div>
 
         <div class="actions">
-          <a class="btn primary" href="https://github.com/USER/REPO" target="_blank" rel="noreferrer">GitHub</a>
-          <a class="btn" href="assets/pdf/thesis.pdf" target="_blank" rel="noreferrer">PDF</a>
+          <a class="btn primary" href="https://github.com/USER/REPO" target="_blank" rel="noreferrer">GitHub Repository</a>
+
+          <!-- If you are allowed to publish a PDF: put it in /assets/pdf/thesis_public.pdf and enable this button -->
+          <a class="btn" href="assets/pdf/thesis_public.pdf" target="_blank" rel="noreferrer">PDF (Public Version)</a>
+
           <a class="btn" href="#repro">Repro</a>
         </div>
       </div>
 
-      <nav class="nav" aria-label="Seitennavigation">
+      <nav class="nav" aria-label="Page navigation">
         <a href="#abstract">Abstract</a>
-        <a href="#context">Kontext</a>
-        <a href="#method">Methode</a>
-        <a href="#results">Ergebnisse</a>
-        <a href="#figures">Abbildungen</a>
-        <a href="#repro">Reproduzierbarkeit</a>
+        <a href="#context">Context</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#figures">Figures</a>
+        <a href="#repro">Reproducibility</a>
+        <a href="#citation">Citation</a>
       </nav>
     </div>
   </header>
@@ -51,105 +65,137 @@
     <section class="section" id="abstract">
       <h2>Abstract</h2>
       <p>
-        Hier dein Abstract. Kurz, konkret, ohne Marketing. 6–10 Zeilen.
+        Evaluating synthetic radar data is challenging because established metrics such as the Fréchet Inception
+        Distance (FID) rely on domain-specific feature extractors and do not transfer cleanly to radar. This thesis
+        presents and systematically evaluates the Fréchet Radar Distance (FRD), a FID-inspired metric that uses
+        random projections as a feature extractor and therefore does not require a domain-trained network. FRD is
+        validated in a controlled testbed built from parameterized pseudo-radar generators that allow targeted
+        variations of statistical properties in radar point clouds. As a reference measure, an approximated
+        log-likelihood is used to quantify similarity of the underlying distributions. Results show that FRD provides
+        consistent, reproducible, and expectation-aligned assessments in these controlled scenarios and correlates
+        with the approximated log-likelihood, making it suitable for capturing structural similarities between radar
+        data distributions. Building on this validation, FRD is used to evaluate U-Net-based diffusion models for
+        generating synthetic radar data. Under idealized training conditions, diffusion models can reproduce key
+        characteristics of radar data, and increasing model capacity shows diminishing returns beyond a certain size.
       </p>
 
       <div class="badges" aria-label="Keywords">
-        <span class="badge">Generative Models</span>
+        <span class="badge">Synthetic Radar</span>
         <span class="badge">Radar Point Clouds</span>
-        <span class="badge">Evaluation Metric</span>
         <span class="badge">FRD</span>
+        <span class="badge">Random Projections</span>
+        <span class="badge">Diffusion Models</span>
+        <span class="badge">U-Net</span>
       </div>
     </section>
 
     <section class="section" id="context">
-      <h2>Kontext</h2>
+      <h2>Context</h2>
       <p>
-        Motivation, Stand der Technik, Lücke. Max. 2 Absätze.
+        Generative models can create synthetic sensor data to improve coverage of rare or costly scenarios.
+        However, for radar data, quality assessment is non-trivial: visual judgment is unreliable and image-centric
+        metrics often do not apply. This thesis focuses on distribution-level evaluation for radar point clouds and on
+        whether diffusion models can reproduce radar-specific structure.
       </p>
 
       <div class="grid2">
         <div class="card">
           <h3>Problem</h3>
           <ul>
-            <li>Warum ist das Problem relevant?</li>
-            <li>Was machen existierende Ansätze nicht gut?</li>
-            <li>Welche Einschränkungen gibt es?</li>
+            <li>Radar data differs strongly from images (sparsity, noise, physics-driven structure).</li>
+            <li>FID-style metrics typically require a domain-trained feature extractor.</li>
+            <li>Without validation, metric scores are not trustworthy for radar.</li>
           </ul>
         </div>
         <div class="card">
-          <h3>Beitrag</h3>
+          <h3>Contributions</h3>
           <ul>
-            <li>Was ist dein konkreter Beitrag?</li>
-            <li>Welche Pipeline / Metrik / Experimente?</li>
-            <li>Welche Erkenntnisse nimmst du mit?</li>
+            <li>Empirical validation of FRD in controlled, parameterized pseudo-radar scenarios.</li>
+            <li>Reference comparison via approximated log-likelihood.</li>
+            <li>FRD-based evaluation of U-Net diffusion models and capacity effects.</li>
           </ul>
         </div>
       </div>
     </section>
 
     <section class="section" id="method">
-      <h2>Methode</h2>
+      <h2>Method</h2>
       <p>
-        High-level Ablauf: Daten → Feature/Projektionen → Distanzmaß → Auswertung.
+        High-level pipeline: generate radar point clouds → discretize into grids → extract features via random
+        projections → estimate Gaussian moments (mean/cov) → compute Fréchet-style distance (FRD).
       </p>
 
+      <!-- Replace these images with your own exported figures -->
       <figure class="figure">
-        <img src="assets/img/pipeline.png" alt="Pipeline-Übersicht" loading="lazy" />
-        <figcaption>Abb. 1: Pipeline-Übersicht (Beispiel: austauschen).</figcaption>
+        <img src="assets/img/pipeline.png" alt="FRD pipeline overview" loading="lazy" />
+        <figcaption>Figure 1: FRD evaluation pipeline (replace with your figure).</figcaption>
       </figure>
 
       <div class="grid3">
         <div class="card">
-          <h3>Daten</h3>
-          <p>Dataset, Format, Splits, Preprocessing.</p>
+          <h3>Data & Generators</h3>
+          <p>
+            Parameterized pseudo-radar generators create controlled distributions of point clouds with adjustable
+            statistics and structure.
+          </p>
         </div>
         <div class="card">
-          <h3>Modelle</h3>
-          <p>Welche Generatoren (z.B. GAN/Flow/Diffusion) + Training.</p>
+          <h3>Models</h3>
+          <p>
+            U-Net diffusion models are trained on discretized radar grids and evaluated via FRD during training.
+          </p>
         </div>
         <div class="card">
-          <h3>Metrik</h3>
-          <p>FRD/FID-Style: Feature-Space + Momente + Distanz.</p>
+          <h3>Metric (FRD)</h3>
+          <p>
+            FRD follows the FID principle in a feature space, but uses random projections instead of a learned
+            domain model.
+          </p>
         </div>
       </div>
 
       <details class="details">
-        <summary>Technische Details (optional)</summary>
+        <summary>Technical details (optional)</summary>
         <div class="detailsBody">
           <ul>
-            <li>Feature-Dimension(en), Anzahl Projektionen, Seeds</li>
-            <li>Stabilität: Bootstrap / CI / Repeats</li>
-            <li>Runtime/Compute Setup</li>
+            <li>Projection dimensions, number of projections, seeds, repeats / confidence intervals</li>
+            <li>Streaming statistics for scalable mean/cov estimation</li>
+            <li>Compute setup and runtimes</li>
           </ul>
         </div>
       </details>
     </section>
 
     <section class="section" id="results">
-      <h2>Ergebnisse</h2>
-      <p>2–5 Kernaussagen. Präzise, mit Zahlen wenn möglich.</p>
+      <h2>Results</h2>
+      <p>Key takeaways (keep this section factual and numeric where possible):</p>
 
       <div class="callouts">
         <div class="callout">
-          <h3>Finding #1</h3>
-          <p>Ein Satz: Effekt + Richtung + Kontext.</p>
+          <h3>Finding #1 — Metric validity</h3>
+          <p>
+            In controlled pseudo-radar experiments, FRD is consistent and reproducible and behaves as expected
+            under targeted distribution changes.
+          </p>
         </div>
         <div class="callout">
-          <h3>Finding #2</h3>
-          <p>Ein Satz: was bedeutet das praktisch?</p>
+          <h3>Finding #2 — Diffusion viability</h3>
+          <p>
+            Under idealized training conditions, diffusion models can reproduce core radar characteristics; capacity
+            shows diminishing returns beyond a certain model size.
+          </p>
         </div>
       </div>
 
       <figure class="figure">
-        <img src="assets/img/teaser.png" alt="Ergebnisplot" loading="lazy" />
-        <figcaption>Abb. 2: Zentrales Ergebnis / Plot.</figcaption>
+        <img src="assets/img/teaser.png" alt="Main results plot" loading="lazy" />
+        <figcaption>Figure 2: Central plot (replace with your best FRD/LL/capacity figure).</figcaption>
       </figure>
     </section>
 
     <section class="section" id="figures">
-      <h2>Abbildungen</h2>
-      <p>Galerie für zusätzliche Plots.</p>
+      <h2>Figures</h2>
+      <p>Gallery for additional plots and ablations.</p>
 
       <div class="gallery">
         <figure class="figure small">
@@ -164,29 +210,42 @@
     </section>
 
     <section class="section" id="repro">
-      <h2>Reproduzierbarkeit</h2>
-      <p>Minimaler Run-Guide (für Reviewer extrem nützlich).</p>
+      <h2>Reproducibility</h2>
+      <p>
+        Minimal run guide. Keep it aligned with your repository structure (scripts/configs).
+      </p>
 
       <pre class="code"><code>git clone https://github.com/USER/REPO
 cd REPO
 
 python -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -e .
 
+# Example: run evaluation
 python scripts/eval.py --config configs/base.yaml</code></pre>
 
       <div class="links">
         <a href="https://github.com/USER/REPO" target="_blank" rel="noreferrer">Repo</a>
         <span class="dot">•</span>
-        <a href="assets/pdf/thesis.pdf" target="_blank" rel="noreferrer">PDF</a>
-        <span class="dot">•</span>
         <a href="https://github.com/USER/REPO/issues" target="_blank" rel="noreferrer">Issues</a>
       </div>
     </section>
 
+    <section class="section" id="citation">
+      <h2>Citation</h2>
+      <p>If you want others to cite your work, add a simple BibTeX entry (adapt as needed):</p>
+      <pre class="code"><code>@thesis{zander2026frd,
+  title   = {Evaluation of Fr\'echet Radar Distance for Assessing Synthetic Radar Data},
+  author  = {Zander, Nicolas},
+  year    = {2026},
+  school  = {OTH Regensburg},
+  type    = {Bachelor's Thesis}
+}</code></pre>
+    </section>
+
     <footer class="footer">
-      <p>© <span id="year"></span> Name</p>
+      <p>© <span id="year"></span> Nicolas Zander</p>
     </footer>
   </main>
 
