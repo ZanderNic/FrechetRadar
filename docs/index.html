@@ -18,34 +18,15 @@
           <p class="kicker">Bachelor’s Thesis</p>
 
           <h1>Evaluation of Fréchet Radar Distance for Assessing Synthetic Radar Data</h1>
-          <p class="sub">
-            A FID-inspired distance for radar point clouds using random projections as a feature extractor,
-            validated in controlled pseudo-radar scenarios and applied to U-Net diffusion models.
-          </p>
-
           <div class="meta">
             <span><b>Author:</b> Nicolas Zander</span>
-            <span><b>Institution:</b> OTH Regensburg (Faculty of Computer Science & Mathematics)</span>
-            <span><b>Program:</b> B.Sc. Artificial Intelligence & Data Science</span>
-            <span><b>Submission date:</b> Feb 10, 2026</span>
-            <span><b>Supervisor:</b> Prof. Dr. Timo Baumann</span>
-            <span><b>Second reviewer:</b> Prof. Dr. Brijnesh Jain</span>
-            <span><b>External supervisor:</b> Dr. Jörg Reichardt (AUMOVIO Germany GmbH)</span>
-          </div>
-
-          <div class="notice">
-            <b>Note:</b> The original thesis PDF may be subject to a confidentiality notice. Publish only a
-            cleared/redacted version if required. (See repository README / legal notice.)
+            <span><b>Institution:</b> OTH Regensburg - Aumovio</span>
           </div>
         </div>
 
         <div class="actions">
-          <a class="btn primary" href="https://github.com/USER/REPO" target="_blank" rel="noreferrer">GitHub Repository</a>
-
-          <!-- If you are allowed to publish a PDF: put it in /assets/pdf/thesis_public.pdf and enable this button -->
-          <a class="btn" href="assets/pdf/thesis_public.pdf" target="_blank" rel="noreferrer">PDF (Public Version)</a>
-
-          <a class="btn" href="#repro">Repro</a>
+          <a class="btn primary" href="https://github.com/ZanderNic/FrechetRadar" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="btn" href="assets/pdf/thesis_public.pdf" target="_blank" rel="noreferrer">PDF (DE)</a>
         </div>
       </div>
 
@@ -121,8 +102,8 @@
     <section class="section" id="method">
       <h2>Method</h2>
       <p>
-        High-level pipeline: generate radar point clouds → discretize into grids → extract features via random
-        projections → estimate Gaussian moments (mean/cov) → compute Fréchet-style distance (FRD).
+        High-level pipeline: generate radar point clouds > discretize into grids > extract features via random
+        projections > estimate Gaussian moments (mean/cov) > compute Fréchet-style distance (FRD).
       </p>
 
       <!-- Replace these images with your own exported figures -->
@@ -153,22 +134,11 @@
           </p>
         </div>
       </div>
-
-      <details class="details">
-        <summary>Technical details (optional)</summary>
-        <div class="detailsBody">
-          <ul>
-            <li>Projection dimensions, number of projections, seeds, repeats / confidence intervals</li>
-            <li>Streaming statistics for scalable mean/cov estimation</li>
-            <li>Compute setup and runtimes</li>
-          </ul>
-        </div>
-      </details>
     </section>
 
     <section class="section" id="results">
       <h2>Results</h2>
-      <p>Key takeaways (keep this section factual and numeric where possible):</p>
+      <p>Key takeaways:</p>
 
       <div class="callouts">
         <div class="callout">
@@ -215,20 +185,17 @@
         Minimal run guide. Keep it aligned with your repository structure (scripts/configs).
       </p>
 
-      <pre class="code"><code>git clone https://github.com/USER/REPO
-cd REPO
+      <pre class="code"><code>git clone https://github.com/ZanderNic/FrechetRadar
+cd FrechetRadar
 
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 pip install -e .
 
-# Example: run evaluation
-python scripts/eval.py --config configs/base.yaml</code></pre>
+python3 ./experiments/main_model_training_FRD.py --config test.json</code></pre>
 
       <div class="links">
-        <a href="https://github.com/USER/REPO" target="_blank" rel="noreferrer">Repo</a>
-        <span class="dot">•</span>
-        <a href="https://github.com/USER/REPO/issues" target="_blank" rel="noreferrer">Issues</a>
+        <a href="https://github.com/ZanderNic/FrechetRadar" target="_blank" rel="noreferrer">Repo</a>
       </div>
     </section>
 
@@ -239,8 +206,7 @@ python scripts/eval.py --config configs/base.yaml</code></pre>
   title   = {Evaluation of Fr\'echet Radar Distance for Assessing Synthetic Radar Data},
   author  = {Zander, Nicolas},
   year    = {2026},
-  school  = {OTH Regensburg},
-  type    = {Bachelor's Thesis}
+  school  = {OTH Regensburg}
 }</code></pre>
     </section>
 
