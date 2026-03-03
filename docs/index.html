@@ -179,7 +179,7 @@
             <h1 class="title is-1 publication-title">Evaluation of the Fréchet Radar Distance for the Quality Assessment of Synthetic Radar Data</h1>
             <div class="is-size-5 publication-authors">
               <span class="author-block">
-                <a href="https://zandernic.github.io/Me/" target="_blank">Nicolas Zander</a><sup>*</sup>
+                <a href="https://zandernic.github.io/Me/" target="_blank">Nicolas Zander</a>
               </span>
             </div>
             <div class="is-size-5 publication-authors">
@@ -216,68 +216,259 @@
   </section>
 
 
-<!-- Paper abstract -->
+<section class="hero teaser">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <div class="content has-text-justified">
+                    <p style="margin-bottom: 20px; margin-top: 10px;">
+                        <span style="font-weight: bold; font-size: 1.3em;">TL;DR:</span> 
+                          <b>FRD</b> is a FID-inspired distance for <b>radar point clouds</b> using <b>random projections</b> as a feature extractor (no domain-pretrained network required).
+                          Validated FRD in <b>controlled pseudo-radar scenarios</b> and compared it to an <b>approximated log-likelihood</b> reference. Applied FRD to evaluate <b>U-Net 
+                          diffusion models</b> for radar data generation and analyzed <b>training dynamics</b> and <b>model capacity</b>.
+                          Key finding: FRD is <b>consistent</b>, <b>reproducible</b>, and behaves <b>as expected</b> in controlled settings; diffusion models can reproduce radar-like 
+                          structure under idealized conditions.
+                    </p> <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</section>
+
+
 <section class="section hero is-light">
   <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
+    <div class="columns is-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
+        <h2 class="title is-3">Motivation</h2>
         <div class="content has-text-justified">
           <p>
-              The evaluation of synthetic radar data represents a central challenge in the field of generative models, as established quality metrics such as the Fréchet Inception Distance (FID) rely on domain-specific feature extractors and cannot be directly transferred to radar data. In this thesis, the Fréchet Radar Distance (FRD) is introduced and systematically evaluated. The FRD is a distance measure inspired by the FID that employs random projections as a feature extractor and therefore does not depend on domain-specific pretrained models.
-
-              To validate the FRD, a controlled test environment with parameterized pseudo-radar generators is employed, enabling targeted variation of statistical properties in the generated radar point clouds. An approximated log-likelihood serves as a reference metric, quantifying the true similarity between the underlying data distributions. The experimental results demonstrate that, within these controlled scenarios, the FRD provides consistent, reproducible, and theoretically expected assessments and correlates with the approximated log-likelihood. Hence, the FRD is suitable for robustly capturing structural similarities between radar data distributions.
-
-              Building upon this validation, the FRD is applied to evaluate U-Net-based diffusion models for the generation of synthetic radar data. Radar data are characterized by sparse, noisy, and physically governed structures that fundamentally differ from image data. The results indicate that, under idealized training conditions, diffusion models are capable of reproducing these characteristics. Additionally, the influence of model capacity is analyzed, showing that beyond a certain model size, no significant improvement in quality can be observed.
+            Evaluating synthetic radar data is difficult because common metrics (e.g., FID) depend on domain-specific feature extractors
+            that do not transfer well to radar. Radar point clouds are sparse, noisy, and physically constrained, so we need a robust,
+            distribution-based metric that does not rely on pretrained image models.
           </p>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- End paper abstract -->
 
 
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- TODO: Replace with your research result images -->
-        <img src="static/images/carousel1.jpg" alt="First research result visualization" loading="lazy"/>
-        <!-- TODO: Replace with description of this result -->
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method Overview</h2>
+        <div class="content">
+          <p><b>Pipeline:</b> point clouds > discretization > random projections > Gaussian statistics > Fréchet distance.</p>
+          <div class="columns is-variable is-6" style="margin-top: 1rem;">
+            <div class="column">
+              <div class="box">
+                <p class="title is-6">Discretization</p>
+                <p class="content is-size-6">
+                  Convert sparse radar point clouds into a fixed representation suitable for statistical comparison.
+                </p>
+              </div>
+            </div>
+            <div class="column">
+              <div class="box">
+                <p class="title is-6">Random Projections</p>
+                <p class="content is-size-6">
+                  Use random projections as a feature extractor to avoid domain-pretrained networks.
+                </p>
+              </div>
+            </div>
+            <div class="column">
+              <div class="box">
+                <p class="title is-6">FRD</p>
+                <p class="content is-size-6">
+                  Compute mean/covariance in the projected space and compare distributions via Fréchet distance.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="Second research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="Third research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="Fourth research result visualization" loading="lazy"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
-      </h2>
     </div>
   </div>
-</div>
-</div>
 </section>
-<!-- End image carousel -->
 
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Experimental Setup</h2>
+        <div class="content">
+          <ul>
+            <li><b>Controlled data:</b> parameterized pseudo-radar generators (targeted distribution shifts).</li>
+            <li><b>Reference metric:</b> approximated log-likelihood to quantify true distribution similarity.</li>
+            <li><b>Protocol:</b> multiple seeds/runs, report mean ± variability; fixed projection settings for fair comparison.</li>
+          </ul>
+
+          <!-- Optional: add a small table for key hyperparameters -->
+          <table class="table is-fullwidth is-striped" style="margin-top: 1rem;">
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Setting</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>FRD projections</td>
+                <td><code>&lt;num_projections&gt;</code></td>
+              </tr>
+              <tr>
+                <td>Feature dimension</td>
+                <td><code>&lt;feature_dim&gt;</code></td>
+              </tr>
+              <tr>
+                <td>Seeds / runs</td>
+                <td><code>&lt;n_seeds&gt;</code></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Results: FRD Validation (RQ1)</h2>
+        <div class="content">
+          <ul>
+            <li><b>Consistency:</b> FRD remains low/stable for identical distributions across seeds.</li>
+            <li><b>Sensitivity:</b> FRD increases with targeted parameter changes (expected ordering).</li>
+            <li><b>Reference alignment:</b> FRD correlates with approximated log-likelihood in controlled scenarios.</li>
+          </ul>
+
+          <!-- Replace with your plots -->
+          <div class="columns is-variable is-6" style="margin-top: 1rem;">
+            <div class="column">
+              <figure class="image">
+                <img src="static/images/results_frd_consistency.png" alt="FRD consistency results plot">
+              </figure>
+              <p class="has-text-centered is-size-7">FRD consistency (same distribution).</p>
+            </div>
+            <div class="column">
+              <figure class="image">
+                <img src="static/images/results_frd_sensitivity.png" alt="FRD sensitivity results plot">
+              </figure>
+              <p class="has-text-centered is-size-7">FRD sensitivity (parameter shifts).</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     Results — Diffusion Models (RQ2–RQ4)
+     ========================= -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Results: Diffusion Models (RQ2–RQ4)</h2>
+        <div class="content">
+          <ul>
+            <li><b>RQ2:</b> diffusion models can reproduce key radar-like structure under idealized training conditions.</li>
+            <li><b>RQ3:</b> FRD tracks the qualitative improvement of samples over training.</li>
+            <li><b>RQ4:</b> capacity study shows diminishing returns beyond a certain model size.</li>
+          </ul>
+
+          <!-- Replace with your plots/samples -->
+          <div class="columns is-variable is-6" style="margin-top: 1rem;">
+            <div class="column">
+              <figure class="image">
+                <img src="static/images/results_diffusion_frd_curve.png" alt="FRD over training epochs plot">
+              </figure>
+              <p class="has-text-centered is-size-7">FRD during training.</p>
+            </div>
+            <div class="column">
+              <figure class="image">
+                <img src="static/images/results_capacity.png" alt="Model capacity vs FRD plot">
+              </figure>
+              <p class="has-text-centered is-size-7">Model capacity vs final FRD.</p>
+            </div>
+          </div>
+
+          <!-- Optional qualitative samples -->
+          <div class="columns is-variable is-6" style="margin-top: 1rem;">
+            <div class="column">
+              <figure class="image">
+                <img src="static/images/sample_real.png" alt="Real radar point cloud sample visualization">
+              </figure>
+              <p class="has-text-centered is-size-7">Reference sample.</p>
+            </div>
+            <div class="column">
+              <figure class="image">
+                <img src="static/images/sample_generated.png" alt="Generated radar point cloud sample visualization">
+              </figure>
+              <p class="has-text-centered is-size-7">Generated sample.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     Discussion / Limitations
+     ========================= -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Limitations</h2>
+        <div class="content">
+          <ul>
+            <li>Validation uses <b>synthetic / pseudo-radar</b> distributions; transfer to real radar data is future work.</li>
+            <li>Primarily <b>distribution-based</b> evaluation; no task-based downstream validation included.</li>
+            <li>FRD depends on representation choices (e.g., discretization, projection count/dim).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     Reproducibility
+     ========================= -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Reproducibility</h2>
+        <div class="content">
+          <p><b>Code:</b> see the GitHub repository linked above.</p>
+          <p><b>Quick start:</b></p>
+          <pre><code>
+git clone https://github.com/ZanderNic/FrechetRadar
+</code></pre>
+          <p class="is-size-7">
+            Tip: list seeds, configs, and exact versions here for clean reproducibility.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 
@@ -303,6 +494,25 @@
 <!--End BibTex citation -->
 
 
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Acknowledgements</h2>
+        <div class="content has-text-justified">
+          <p>
+            This project was carried out as part of my dual study program and within the scope of my Bachelor’s thesis at Aumovio. The prior work of Jörg Reichardt and Jonas Neuhofer 
+            (Aumovio), conducted in the context of the nxtAIM project, formed the foundation for this repository. Their conceptual contributions and implementations of the FRD enabled 
+            the extension and refinement of several core components. I would especially like to thank Jörg Reichardt for supervising this thesis and for his continuous guidance and 
+            constructive feedback throughout the project.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
   <footer class="footer">
   <div class="container">
     <div class="columns is-centered">
@@ -320,6 +530,8 @@
     </div>
   </div>
 </footer>
+
+
 
 <!-- Statcounter tracking code -->
   
