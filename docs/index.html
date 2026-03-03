@@ -1,519 +1,223 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- Primary Meta Tags -->
-  <meta name="title" content="Evaluation of the Fréchet Radar Distance for the Quality Assessment of Synthetic Radar Data - Nicolas Zander">
-  <meta name="description" content="
-  The evaluation of synthetic radar data represents a central challenge in the field of generative models, as established quality metrics such as the Fréchet Inception Distance (FID) rely on domain-specific feature extractors and cannot be directly transferred to radar data. In this thesis, the Fréchet Radar Distance (FRD) is introduced and systematically evaluated. The FRD is a distance measure inspired by the FID that employs random projections as a feature extractor and therefore does not depend on domain-specific pretrained models.
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Bachelorarbeit – Übersicht (Abstract, Kontext, Methode, Ergebnisse)" />
+  <title>BA – Übersicht</title>
 
-  To validate the FRD, a controlled test environment with parameterized pseudo-radar generators is employed, enabling targeted variation of statistical properties in the generated radar point clouds. An approximated log-likelihood serves as a reference metric, quantifying the true similarity between the underlying data distributions. The experimental results demonstrate that, within these controlled scenarios, the FRD provides consistent, reproducible, and theoretically expected assessments and correlates with the approximated log-likelihood. Hence, the FRD is suitable for robustly capturing structural similarities between radar data distributions.
-
-  Building upon this validation, the FRD is applied to evaluate U-Net-based diffusion models for the generation of synthetic radar data. Radar data are characterized by sparse, noisy, and physically governed structures that fundamentally differ from image data. The results indicate that, under idealized training conditions, diffusion models are capable of reproducing these characteristics. Additionally, the influence of model capacity is analyzed, showing that beyond a certain model size, no significant improvement in quality can be observed.
-  ">
-  <meta name="author" content="Nicolas Zander">
-  <meta name="robots" content="index, follow">
-  <meta name="language" content="English">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="OTH Regensburg - Aumovio">
-  <meta property="og:title" content="Evaluation of the Fréchet Radar Distance for the Quality Assessment of Synthetic Radar Data">
-  <meta property="og:description" content="
-    The evaluation of synthetic radar data represents a central challenge in the field of generative models, as established quality metrics such as the Fréchet Inception Distance (FID) rely on domain-specific feature extractors and cannot be directly transferred to radar data. In this thesis, the Fréchet Radar Distance (FRD) is introduced and systematically evaluated. The FRD is a distance measure inspired by the FID that employs random projections as a feature extractor and therefore does not depend on domain-specific pretrained models.
-
-    To validate the FRD, a controlled test environment with parameterized pseudo-radar generators is employed, enabling targeted variation of statistical properties in the generated radar point clouds. An approximated log-likelihood serves as a reference metric, quantifying the true similarity between the underlying data distributions. The experimental results demonstrate that, within these controlled scenarios, the FRD provides consistent, reproducible, and theoretically expected assessments and correlates with the approximated log-likelihood. Hence, the FRD is suitable for robustly capturing structural similarities between radar data distributions.
-
-    Building upon this validation, the FRD is applied to evaluate U-Net-based diffusion models for the generation of synthetic radar data. Radar data are characterized by sparse, noisy, and physically governed structures that fundamentally differ from image data. The results indicate that, under idealized training conditions, diffusion models are capable of reproducing these characteristics. Additionally, the influence of model capacity is analyzed, showing that beyond a certain model size, no significant improvement in quality can be observed.
-  ">
-  <meta property="og:url" content="https://zandernic.github.io/FrechetRadar/">
-  <meta property="og:image:alt" content="PAPER_TITLE - Research Preview">
-  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
-  <meta property="article:author" content="FIRST_AUTHOR_NAME">
-  <meta property="article:section" content="Research">
-  <meta property="article:tag" content="KEYWORD1">
-  <meta property="article:tag" content="KEYWORD2">
-
-  <!-- Academic/Research Specific -->
-  <meta name="citation_title" content="PAPER_TITLE">
-  <meta name="citation_author" content="FIRST_AUTHOR_LAST, FIRST_AUTHOR_FIRST">
-  <meta name="citation_author" content="SECOND_AUTHOR_LAST, SECOND_AUTHOR_FIRST">
-  <meta name="citation_publication_date" content="2024">
-  <meta name="citation_conference_title" content="CONFERENCE_NAME">
-  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">
-  
-  <!-- Additional SEO -->
-  <meta name="theme-color" content="#2563eb">
-  <meta name="msapplication-TileColor" content="#2563eb">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  
-  <!-- Preconnect for performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://ajax.googleapis.com">
-  <link rel="preconnect" href="https://documentcloud.adobe.com">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-
-  <title>Evaluation of the Fréchet Radar Distance for the Quality Assessment of Synthetic Radar Data - Nicolas Zander</title>
-  
-  <!-- Favicon and App Icons -->
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link rel="apple-touch-icon" href="static/images/favicon.ico">
-  
-  <!-- Critical CSS - Load synchronously -->
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
-  
-  <!-- Non-critical CSS - Load asynchronously -->
-  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  
-  <!-- Fallback for browsers that don't support preload -->
-  <noscript>
-    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  </noscript>
-  
-  <!-- Fonts - Optimized loading -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Defer non-critical JavaScript -->
-  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script defer src="static/js/bulma-carousel.min.js"></script>
-  <script defer src="static/js/bulma-slider.min.js"></script>
-  <script defer src="static/js/index.js"></script>
-  
-  <!-- Structured Data for Academic Papers -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ScholarlyArticle",
-    "headline": "PAPER_TITLE",
-    "description": "BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS",
-    "author": [
-      {
-        "@type": "Person",
-        "name": "FIRST_AUTHOR_NAME",
-        "affiliation": {
-          "@type": "Organization",
-          "name": "INSTITUTION_NAME"
-        }
-      },
-      {
-        "@type": "Person",
-        "name": "SECOND_AUTHOR_NAME",
-        "affiliation": {
-          "@type": "Organization",
-          "name": "INSTITUTION_NAME"
-        }
-      }
-    ],
-    "datePublished": "2024-01-01",
-    "publisher": {
-      "@type": "Organization",
-      "name": "CONFERENCE_OR_JOURNAL_NAME"
-    },
-    "url": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE",
-    "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
-    "keywords": ["KEYWORD1", "KEYWORD2", "KEYWORD3", "machine learning", "computer vision"],
-    "abstract": "FULL_ABSTRACT_TEXT_HERE",
-    "citation": "BIBTEX_CITATION_HERE",
-    "isAccessibleForFree": true,
-    "license": "https://creativecommons.org/licenses/by/4.0/",
-    "mainEntity": {
-      "@type": "WebPage",
-      "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
-    },
-    "about": [
-      {
-        "@type": "Thing",
-        "name": "RESEARCH_AREA_1"
-      },
-      {
-        "@type": "Thing", 
-        "name": "RESEARCH_AREA_2"
-      }
-    ]
-  }
-  </script>
-  
-  <!-- Website/Organization Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "INSTITUTION_OR_LAB_NAME",
-    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
-    "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico",
-    "sameAs": [
-      "https://twitter.com/YOUR_TWITTER_HANDLE",
-      "https://github.com/YOUR_GITHUB_USERNAME"
-    ]
-  }
-  </script>
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
+
 <body>
+  <a class="skip-link" href="#content">Zum Inhalt springen</a>
 
-
-  <!-- Scroll to Top Button -->
-  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
-    <i class="fas fa-chevron-up"></i>
-  </button>
-
-
-  <main id="main-content">
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Evaluation of the Fréchet Radar Distance for the Quality Assessment of Synthetic Radar Data</h1>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block">
-                <a href="https://zandernic.github.io/Me/" target="_blank">Nicolas Zander</a>
-              </span>
-            </div>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block">OTH Regensburg - Aumovio<br>2026</span>
-            </div>
-
-            <div class="column has-text-centered">
-              <div class="publication-links">
-                  <span class="link-block">
-                      <a href="static/pdfs/ba.pdf" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file-pdf"></i>
-                      </span>
-                      <span>PDF</span>
-                    </a>
-                  </span>
-
-                  <span class="link-block">
-                    <a href="https://github.com/ZanderNic/FrechetRadar" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code</span>
-                  </a>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-<section class="hero teaser">
-    <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-            <div class="column is-four-fifths">
-                <div class="content has-text-justified">
-                    <p style="margin-bottom: 20px; margin-top: 10px;">
-                        <span style="font-weight: bold; font-size: 1.3em;">TL;DR:</span> 
-                          <b>FRD</b> is a FID-inspired distance for <b>radar point clouds</b> using <b>random projections</b> as a feature extractor (no domain-pretrained network required).
-                          Validated FRD in <b>controlled pseudo-radar scenarios</b> and compared it to an <b>approximated log-likelihood</b> reference. Applied FRD to evaluate <b>U-Net 
-                          diffusion models</b> for radar data generation and analyzed <b>training dynamics</b> and <b>model capacity</b>.
-                          Key finding: FRD is <b>consistent</b>, <b>reproducible</b>, and behaves <b>as expected</b> in controlled settings; diffusion models can reproduce radar-like 
-                          structure under idealized conditions.
-                    </p> <br>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
-</section>
-
-
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Motivation</h2>
-        <div class="content has-text-justified">
-          <p>
-            Evaluating synthetic radar data is difficult because common metrics (e.g., FID) depend on domain-specific feature extractors
-            that do not transfer well to radar. Radar point clouds are sparse, noisy, and physically constrained, so we need a robust,
-            distribution-based metric that does not rely on pretrained image models.
+  <header class="site-header" id="top">
+    <div class="container">
+      <div class="title-row">
+        <div>
+          <h1>Bachelorarbeit: Titel hier</h1>
+          <p class="subtitle">
+            Kurzbeschreibung / One-liner (z.B. „Evaluating synthetic radar point clouds with FRD“)
           </p>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Method Overview</h2>
-        <div class="content">
-          <p><b>Pipeline:</b> point clouds > discretization > random projections > Gaussian statistics > Fréchet distance.</p>
-          <div class="columns is-variable is-6" style="margin-top: 1rem;">
-            <div class="column">
-              <div class="box">
-                <p class="title is-6">Discretization</p>
-                <p class="content is-size-6">
-                  Convert sparse radar point clouds into a fixed representation suitable for statistical comparison.
-                </p>
-              </div>
-            </div>
-            <div class="column">
-              <div class="box">
-                <p class="title is-6">Random Projections</p>
-                <p class="content is-size-6">
-                  Use random projections as a feature extractor to avoid domain-pretrained networks.
-                </p>
-              </div>
-            </div>
-            <div class="column">
-              <div class="box">
-                <p class="title is-6">FRD</p>
-                <p class="content is-size-6">
-                  Compute mean/covariance in the projected space and compare distributions via Fréchet distance.
-                </p>
-              </div>
-            </div>
-          </div>
-
+        <div class="actions">
+          <a class="btn primary" href="https://github.com/USER/REPO" target="_blank" rel="noreferrer">
+            GitHub Repo
+          </a>
+          <a class="btn" href="assets/pdf/thesis.pdf" target="_blank" rel="noreferrer">
+            PDF öffnen
+          </a>
+          <a class="btn" href="#results">
+            Ergebnisse
+          </a>
         </div>
       </div>
+
+      <nav class="nav">
+        <a href="#abstract">Abstract</a>
+        <a href="#context">Kontext</a>
+        <a href="#method">Methode</a>
+        <a href="#results">Ergebnisse</a>
+        <a href="#figures">Abbildungen</a>
+        <a href="#repro">Reproduzierbarkeit</a>
+      </nav>
     </div>
-  </div>
-</section>
+  </header>
 
+  <main id="content" class="container">
+    <section class="card" id="abstract">
+      <h2>Abstract</h2>
+      <p>
+        Hier dein Abstract. 6–10 Zeilen, klar: Problem → Ansatz → Ergebnis → Beitrag.
+      </p>
 
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Experimental Setup</h2>
-        <div class="content">
+      <div class="meta">
+        <div><span class="k">Autor:</span> <span class="v">Name</span></div>
+        <div><span class="k">Institution:</span> <span class="v">OTH Regensburg</span></div>
+        <div><span class="k">Betreuung:</span> <span class="v">Prof. …</span></div>
+        <div><span class="k">Datum:</span> <span class="v">MM/YYYY</span></div>
+      </div>
+
+      <div class="chips" aria-label="Keywords">
+        <span class="chip">Generative Models</span>
+        <span class="chip">Radar Point Clouds</span>
+        <span class="chip">Evaluation Metric</span>
+        <span class="chip">FRD</span>
+      </div>
+    </section>
+
+    <section class="card" id="context">
+      <h2>Kontext</h2>
+      <p>
+        Kurz: Motivation, warum das Problem relevant ist, was der Status quo ist und wo die Lücke liegt.
+      </p>
+
+      <div class="grid-2">
+        <div class="box">
+          <h3>Problem</h3>
           <ul>
-            <li><b>Controlled data:</b> parameterized pseudo-radar generators (targeted distribution shifts).</li>
-            <li><b>Reference metric:</b> approximated log-likelihood to quantify true distribution similarity.</li>
-            <li><b>Protocol:</b> multiple seeds/runs, report mean ± variability; fixed projection settings for fair comparison.</li>
+            <li>1–3 Bulletpoints</li>
+            <li>Warum schwierig?</li>
+            <li>Was fehlt bisher?</li>
           </ul>
-
-          <!-- Optional: add a small table for key hyperparameters -->
-          <table class="table is-fullwidth is-striped" style="margin-top: 1rem;">
-            <thead>
-              <tr>
-                <th>Component</th>
-                <th>Setting</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>FRD projections</td>
-                <td><code>&lt;num_projections&gt;</code></td>
-              </tr>
-              <tr>
-                <td>Feature dimension</td>
-                <td><code>&lt;feature_dim&gt;</code></td>
-              </tr>
-              <tr>
-                <td>Seeds / runs</td>
-                <td><code>&lt;n_seeds&gt;</code></td>
-              </tr>
-            </tbody>
-          </table>
-
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Results: FRD Validation (RQ1)</h2>
-        <div class="content">
+        <div class="box">
+          <h3>Beitrag</h3>
           <ul>
-            <li><b>Consistency:</b> FRD remains low/stable for identical distributions across seeds.</li>
-            <li><b>Sensitivity:</b> FRD increases with targeted parameter changes (expected ordering).</li>
-            <li><b>Reference alignment:</b> FRD correlates with approximated log-likelihood in controlled scenarios.</li>
-          </ul>
-
-          <!-- Replace with your plots -->
-          <div class="columns is-variable is-6" style="margin-top: 1rem;">
-            <div class="column">
-              <figure class="image">
-                <img src="static/images/results_frd_consistency.png" alt="FRD consistency results plot">
-              </figure>
-              <p class="has-text-centered is-size-7">FRD consistency (same distribution).</p>
-            </div>
-            <div class="column">
-              <figure class="image">
-                <img src="static/images/results_frd_sensitivity.png" alt="FRD sensitivity results plot">
-              </figure>
-              <p class="has-text-centered is-size-7">FRD sensitivity (parameter shifts).</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =========================
-     Results — Diffusion Models (RQ2–RQ4)
-     ========================= -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Results: Diffusion Models (RQ2–RQ4)</h2>
-        <div class="content">
-          <ul>
-            <li><b>RQ2:</b> diffusion models can reproduce key radar-like structure under idealized training conditions.</li>
-            <li><b>RQ3:</b> FRD tracks the qualitative improvement of samples over training.</li>
-            <li><b>RQ4:</b> capacity study shows diminishing returns beyond a certain model size.</li>
-          </ul>
-
-          <!-- Replace with your plots/samples -->
-          <div class="columns is-variable is-6" style="margin-top: 1rem;">
-            <div class="column">
-              <figure class="image">
-                <img src="static/images/results_diffusion_frd_curve.png" alt="FRD over training epochs plot">
-              </figure>
-              <p class="has-text-centered is-size-7">FRD during training.</p>
-            </div>
-            <div class="column">
-              <figure class="image">
-                <img src="static/images/results_capacity.png" alt="Model capacity vs FRD plot">
-              </figure>
-              <p class="has-text-centered is-size-7">Model capacity vs final FRD.</p>
-            </div>
-          </div>
-
-          <!-- Optional qualitative samples -->
-          <div class="columns is-variable is-6" style="margin-top: 1rem;">
-            <div class="column">
-              <figure class="image">
-                <img src="static/images/sample_real.png" alt="Real radar point cloud sample visualization">
-              </figure>
-              <p class="has-text-centered is-size-7">Reference sample.</p>
-            </div>
-            <div class="column">
-              <figure class="image">
-                <img src="static/images/sample_generated.png" alt="Generated radar point cloud sample visualization">
-              </figure>
-              <p class="has-text-centered is-size-7">Generated sample.</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =========================
-     Discussion / Limitations
-     ========================= -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Limitations</h2>
-        <div class="content">
-          <ul>
-            <li>Validation uses <b>synthetic / pseudo-radar</b> distributions; transfer to real radar data is future work.</li>
-            <li>Primarily <b>distribution-based</b> evaluation; no task-based downstream validation included.</li>
-            <li>FRD depends on representation choices (e.g., discretization, projection count/dim).</li>
+            <li>Was genau lieferst du?</li>
+            <li>Welche Messmethode / Pipeline?</li>
+            <li>Was ist neu / besser?</li>
           </ul>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
+    <section class="card" id="method">
+      <h2>Methode</h2>
+      <p>
+        High-level Pipeline beschreiben: Daten → Preprocessing → Embedding/Projektionen → Distanzmaß → Auswertung.
+      </p>
 
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Acknowledgements</h2>
-        <div class="content has-text-justified">
-          <p>
-            This project was carried out as part of my dual study program and within the scope of my Bachelor’s thesis at Aumovio. The prior work of Jörg Reichardt and Jonas Neuhofer 
-            (Aumovio), conducted in the context of the nxtAIM project, formed the foundation for this repository. Their conceptual contributions and implementations of the FRD enabled 
-            the extension and refinement of several core components. I would especially like to thank Jörg Reichardt for supervising this thesis and for his continuous guidance and 
-            constructive feedback throughout the project.
-          </p>
+      <figure class="figure">
+        <img src="assets/img/pipeline.png" alt="Pipeline-Übersicht" loading="lazy" />
+        <figcaption>Abb. 1: Pipeline-Übersicht (Beispielbild austauschen).</figcaption>
+      </figure>
+
+      <div class="grid-3">
+        <div class="box">
+          <h3>Daten</h3>
+          <p>Dataset, Format, Größe, Splits.</p>
+        </div>
+        <div class="box">
+          <h3>Modell(e)</h3>
+          <p>GAN/Flow/Diffusion etc. + Trainings-Setup.</p>
+        </div>
+        <div class="box">
+          <h3>Metrik</h3>
+          <p>FRD/FID-Style: Feature-Space, Momente, Distanz.</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
 
+      <details class="details">
+        <summary>Details (optional)</summary>
+        <div class="details-body">
+          <ul>
+            <li>Hyperparameter / Feature-Dimensionen</li>
+            <li>Random projections: Anzahl, Seeds</li>
+            <li>Evaluation: Bootstrap / Konfidenzintervalle</li>
+          </ul>
+        </div>
+      </details>
+    </section>
 
-<!--BibTex citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <div class="bibtex-header">
-        <h2 class="title">BibTeX</h2>
-        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
-          <i class="fas fa-copy"></i>
-          <span class="copy-text">Copy</span>
-        </button>
-      </div>
-      <pre id="bibtex-code"><code>@article{YourPaperKey2024,
-  title={Your Paper Title Here},
-  author={First Author and Second Author and Third Author},
-  journal={Conference/Journal Name},
-  year={2024},
-  url={https://your-domain.com/your-project-page}
-}</code></pre>
-    </div>
-</section>
-<!--End BibTex citation -->
+    <section class="card" id="results">
+      <h2>Ergebnisse</h2>
+      <p>
+        Kurz und konkret: die 2–5 wichtigsten Findings. Keine Romane.
+      </p>
 
-
-  <footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-
-          <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-
+      <div class="callouts">
+        <div class="callout">
+          <h3>Key Finding #1</h3>
+          <p>Ein Satz: was ist das Resultat + Richtung (besser/schlechter) + Kontext.</p>
+        </div>
+        <div class="callout">
+          <h3>Key Finding #2</h3>
+          <p>Ein Satz: was bedeutet das praktisch?</p>
         </div>
       </div>
-    </div>
-  </div>
-</footer>
 
+      <figure class="figure">
+        <img src="assets/img/teaser.png" alt="Plot / Ergebnis" loading="lazy" />
+        <figcaption>Abb. 2: Zentrales Ergebnis / Plot (Beispielbild austauschen).</figcaption>
+      </figure>
+    </section>
 
+    <section class="card" id="figures">
+      <h2>Abbildungen</h2>
+      <p>Bild-Galerie (für mehrere Plots/Diagramme). Einfach weitere <code>&lt;figure&gt;</code> hinzufügen.</p>
 
-<!-- Statcounter tracking code -->
-  
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+      <div class="gallery">
+        <figure class="figure small">
+          <img src="assets/img/teaser.png" alt="Plot 1" loading="lazy" />
+          <figcaption>Plot 1</figcaption>
+        </figure>
+        <figure class="figure small">
+          <img src="assets/img/pipeline.png" alt="Plot 2" loading="lazy" />
+          <figcaption>Plot 2</figcaption>
+        </figure>
+      </div>
+    </section>
 
-    <!-- End of Statcounter Code -->
+    <section class="card" id="repro">
+      <h2>Reproduzierbarkeit</h2>
+      <p>
+        Minimaler “How to run”-Block. Gut für Reviewer.
+      </p>
 
-  </body>
-  </html>
+      <pre class="code"><code># Clone
+git clone https://github.com/USER/REPO
+cd REPO
+
+# Setup (Beispiel)
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+# Run evaluation
+python scripts/eval.py --config configs/base.yaml</code></pre>
+
+      <div class="links">
+        <a href="https://github.com/USER/REPO/issues" target="_blank" rel="noreferrer">Issues / Fragen</a>
+        <span class="sep">·</span>
+        <a href="assets/pdf/thesis.pdf" target="_blank" rel="noreferrer">Thesis PDF</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>
+        © <span id="year"></span> Nicolas Zander ·
+        <a href="#top">Nach oben</a>
+      </p>
+    </footer>
+  </main>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Nach oben scrollen">↑</button>
+
+  <script>
+    // year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // back-to-top button
+    const btn = document.getElementById("toTop");
+    const onScroll = () => {
+      btn.classList.toggle("show", window.scrollY > 500);
+    };
+    window.addEventListener("scroll", onScroll);
+    btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    onScroll();
+  </script>
+</body>
+</html>
