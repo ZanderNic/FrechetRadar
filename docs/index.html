@@ -3,39 +3,40 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Bachelorarbeit – Übersicht (Abstract, Kontext, Methode, Ergebnisse)" />
-  <title>BA – Übersicht</title>
-
+  <meta name="description" content="Bachelorarbeit – Abstract, Kontext, Methode, Ergebnisse" />
+  <title>BA – Titel</title>
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
 <body>
-  <a class="skip-link" href="#content">Zum Inhalt springen</a>
+  <a class="skip" href="#content">Zum Inhalt springen</a>
 
-  <header class="site-header" id="top">
-    <div class="container">
-      <div class="title-row">
-        <div>
-          <h1>Bachelorarbeit: Titel hier</h1>
-          <p class="subtitle">
-            Kurzbeschreibung / One-liner (z.B. „Evaluating synthetic radar point clouds with FRD“)
+  <header class="header">
+    <div class="wrap">
+      <div class="top">
+        <div class="headings">
+          <p class="kicker">Bachelorarbeit</p>
+          <h1>Titel der Arbeit</h1>
+          <p class="sub">
+            One-liner: Problem → Methode → Ergebnis (max. 1–2 Sätze).
           </p>
+
+          <div class="meta">
+            <span><b>Autor:</b> Name</span>
+            <span><b>Institution:</b> OTH Regensburg</span>
+            <span><b>Betreuung:</b> Prof. …</span>
+            <span><b>Datum:</b> 2026</span>
+          </div>
         </div>
 
         <div class="actions">
-          <a class="btn primary" href="https://github.com/USER/REPO" target="_blank" rel="noreferrer">
-            GitHub Repo
-          </a>
-          <a class="btn" href="assets/pdf/thesis.pdf" target="_blank" rel="noreferrer">
-            PDF öffnen
-          </a>
-          <a class="btn" href="#results">
-            Ergebnisse
-          </a>
+          <a class="btn primary" href="https://github.com/USER/REPO" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="btn" href="assets/pdf/thesis.pdf" target="_blank" rel="noreferrer">PDF</a>
+          <a class="btn" href="#repro">Repro</a>
         </div>
       </div>
 
-      <nav class="nav">
+      <nav class="nav" aria-label="Seitennavigation">
         <a href="#abstract">Abstract</a>
         <a href="#context">Kontext</a>
         <a href="#method">Methode</a>
@@ -46,118 +47,109 @@
     </div>
   </header>
 
-  <main id="content" class="container">
-    <section class="card" id="abstract">
+  <main id="content" class="wrap">
+    <section class="section" id="abstract">
       <h2>Abstract</h2>
       <p>
-        Hier dein Abstract. 6–10 Zeilen, klar: Problem → Ansatz → Ergebnis → Beitrag.
+        Hier dein Abstract. Kurz, konkret, ohne Marketing. 6–10 Zeilen.
       </p>
 
-      <div class="meta">
-        <div><span class="k">Autor:</span> <span class="v">Name</span></div>
-        <div><span class="k">Institution:</span> <span class="v">OTH Regensburg</span></div>
-        <div><span class="k">Betreuung:</span> <span class="v">Prof. …</span></div>
-        <div><span class="k">Datum:</span> <span class="v">MM/YYYY</span></div>
-      </div>
-
-      <div class="chips" aria-label="Keywords">
-        <span class="chip">Generative Models</span>
-        <span class="chip">Radar Point Clouds</span>
-        <span class="chip">Evaluation Metric</span>
-        <span class="chip">FRD</span>
+      <div class="badges" aria-label="Keywords">
+        <span class="badge">Generative Models</span>
+        <span class="badge">Radar Point Clouds</span>
+        <span class="badge">Evaluation Metric</span>
+        <span class="badge">FRD</span>
       </div>
     </section>
 
-    <section class="card" id="context">
+    <section class="section" id="context">
       <h2>Kontext</h2>
       <p>
-        Kurz: Motivation, warum das Problem relevant ist, was der Status quo ist und wo die Lücke liegt.
+        Motivation, Stand der Technik, Lücke. Max. 2 Absätze.
       </p>
 
-      <div class="grid-2">
-        <div class="box">
+      <div class="grid2">
+        <div class="card">
           <h3>Problem</h3>
           <ul>
-            <li>1–3 Bulletpoints</li>
-            <li>Warum schwierig?</li>
-            <li>Was fehlt bisher?</li>
+            <li>Warum ist das Problem relevant?</li>
+            <li>Was machen existierende Ansätze nicht gut?</li>
+            <li>Welche Einschränkungen gibt es?</li>
           </ul>
         </div>
-        <div class="box">
+        <div class="card">
           <h3>Beitrag</h3>
           <ul>
-            <li>Was genau lieferst du?</li>
-            <li>Welche Messmethode / Pipeline?</li>
-            <li>Was ist neu / besser?</li>
+            <li>Was ist dein konkreter Beitrag?</li>
+            <li>Welche Pipeline / Metrik / Experimente?</li>
+            <li>Welche Erkenntnisse nimmst du mit?</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <section class="card" id="method">
+    <section class="section" id="method">
       <h2>Methode</h2>
       <p>
-        High-level Pipeline beschreiben: Daten → Preprocessing → Embedding/Projektionen → Distanzmaß → Auswertung.
+        High-level Ablauf: Daten → Feature/Projektionen → Distanzmaß → Auswertung.
       </p>
 
       <figure class="figure">
         <img src="assets/img/pipeline.png" alt="Pipeline-Übersicht" loading="lazy" />
-        <figcaption>Abb. 1: Pipeline-Übersicht (Beispielbild austauschen).</figcaption>
+        <figcaption>Abb. 1: Pipeline-Übersicht (Beispiel: austauschen).</figcaption>
       </figure>
 
-      <div class="grid-3">
-        <div class="box">
+      <div class="grid3">
+        <div class="card">
           <h3>Daten</h3>
-          <p>Dataset, Format, Größe, Splits.</p>
+          <p>Dataset, Format, Splits, Preprocessing.</p>
         </div>
-        <div class="box">
-          <h3>Modell(e)</h3>
-          <p>GAN/Flow/Diffusion etc. + Trainings-Setup.</p>
+        <div class="card">
+          <h3>Modelle</h3>
+          <p>Welche Generatoren (z.B. GAN/Flow/Diffusion) + Training.</p>
         </div>
-        <div class="box">
+        <div class="card">
           <h3>Metrik</h3>
-          <p>FRD/FID-Style: Feature-Space, Momente, Distanz.</p>
+          <p>FRD/FID-Style: Feature-Space + Momente + Distanz.</p>
         </div>
       </div>
 
       <details class="details">
-        <summary>Details (optional)</summary>
-        <div class="details-body">
+        <summary>Technische Details (optional)</summary>
+        <div class="detailsBody">
           <ul>
-            <li>Hyperparameter / Feature-Dimensionen</li>
-            <li>Random projections: Anzahl, Seeds</li>
-            <li>Evaluation: Bootstrap / Konfidenzintervalle</li>
+            <li>Feature-Dimension(en), Anzahl Projektionen, Seeds</li>
+            <li>Stabilität: Bootstrap / CI / Repeats</li>
+            <li>Runtime/Compute Setup</li>
           </ul>
         </div>
       </details>
     </section>
 
-    <section class="card" id="results">
+    <section class="section" id="results">
       <h2>Ergebnisse</h2>
-      <p>
-        Kurz und konkret: die 2–5 wichtigsten Findings. Keine Romane.
-      </p>
+      <p>2–5 Kernaussagen. Präzise, mit Zahlen wenn möglich.</p>
 
       <div class="callouts">
         <div class="callout">
-          <h3>Key Finding #1</h3>
-          <p>Ein Satz: was ist das Resultat + Richtung (besser/schlechter) + Kontext.</p>
+          <h3>Finding #1</h3>
+          <p>Ein Satz: Effekt + Richtung + Kontext.</p>
         </div>
         <div class="callout">
-          <h3>Key Finding #2</h3>
+          <h3>Finding #2</h3>
           <p>Ein Satz: was bedeutet das praktisch?</p>
         </div>
       </div>
 
       <figure class="figure">
-        <img src="assets/img/teaser.png" alt="Plot / Ergebnis" loading="lazy" />
-        <figcaption>Abb. 2: Zentrales Ergebnis / Plot (Beispielbild austauschen).</figcaption>
+        <img src="assets/img/teaser.png" alt="Ergebnisplot" loading="lazy" />
+        <figcaption>Abb. 2: Zentrales Ergebnis / Plot.</figcaption>
       </figure>
     </section>
 
-    <section class="card" id="figures">
+    <section class="section" id="figures">
       <h2>Abbildungen</h2>
-      <p>Bild-Galerie (für mehrere Plots/Diagramme). Einfach weitere <code>&lt;figure&gt;</code> hinzufügen.</p>
+      <p>Galerie für zusätzliche Plots.</p>
 
       <div class="gallery">
         <figure class="figure small">
@@ -171,53 +163,35 @@
       </div>
     </section>
 
-    <section class="card" id="repro">
+    <section class="section" id="repro">
       <h2>Reproduzierbarkeit</h2>
-      <p>
-        Minimaler “How to run”-Block. Gut für Reviewer.
-      </p>
+      <p>Minimaler Run-Guide (für Reviewer extrem nützlich).</p>
 
-      <pre class="code"><code># Clone
-git clone https://github.com/USER/REPO
+      <pre class="code"><code>git clone https://github.com/USER/REPO
 cd REPO
 
-# Setup (Beispiel)
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 
-# Run evaluation
 python scripts/eval.py --config configs/base.yaml</code></pre>
 
       <div class="links">
-        <a href="https://github.com/USER/REPO/issues" target="_blank" rel="noreferrer">Issues / Fragen</a>
-        <span class="sep">·</span>
-        <a href="assets/pdf/thesis.pdf" target="_blank" rel="noreferrer">Thesis PDF</a>
+        <a href="https://github.com/USER/REPO" target="_blank" rel="noreferrer">Repo</a>
+        <span class="dot">•</span>
+        <a href="assets/pdf/thesis.pdf" target="_blank" rel="noreferrer">PDF</a>
+        <span class="dot">•</span>
+        <a href="https://github.com/USER/REPO/issues" target="_blank" rel="noreferrer">Issues</a>
       </div>
     </section>
 
     <footer class="footer">
-      <p>
-        © <span id="year"></span> Nicolas Zander ·
-        <a href="#top">Nach oben</a>
-      </p>
+      <p>© <span id="year"></span> Name</p>
     </footer>
   </main>
 
-  <button class="to-top" id="toTop" type="button" aria-label="Nach oben scrollen">↑</button>
-
   <script>
-    // year
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    // back-to-top button
-    const btn = document.getElementById("toTop");
-    const onScroll = () => {
-      btn.classList.toggle("show", window.scrollY > 500);
-    };
-    window.addEventListener("scroll", onScroll);
-    btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-    onScroll();
   </script>
 </body>
 </html>
