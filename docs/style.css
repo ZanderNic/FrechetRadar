@@ -16,42 +16,16 @@ body{
   line-height:1.6;
 }
 
-.container{
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 28px 18px 64px;
-}
-
-
 .header {
   padding-bottom: 10px;
   border-bottom: 1px solid var(--line);
   text-align: center; 
 }
 
-.links {
-  display: flex;
-  justify-content: center; 
-  gap: 10px;
-  margin-top: 14px;
-  flex-wrap: wrap;
-}
-
 .title{ margin:0 0 10px; font-size: 2.05rem; line-height:1.25; }
 .authors{ margin:0; color:var(--fg); font-weight:600; }
 .meta{ margin:6px 0 0; color:var(--muted); }
 
-
-.btn{
-  display:inline-block;
-  padding:10px 14px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  text-decoration:none;
-  color:var(--fg);
-  background: rgba(255,255,255,0.03);
-}
-.btn:hover{ border-color: var(--accent); }
 
 .teaser{
   margin-top: 18px;
@@ -146,4 +120,35 @@ pre{
   margin: 0 auto;
   padding: 28px 18px 64px;
   text-align: center;   /* <-- DAS IST DIE LÖSUNG */
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 20px 0 30px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #1a1f27;
+  border: 1px solid #2a2f3a;
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.pill:hover {
+  background: #232936;
+  border-color: var(--accent);
+}
+
+.pill-icon {
+  width: 16px;
+  height: 16px;
 }
