@@ -8,9 +8,8 @@
   --accent: #2563eb;
   --accent2: #1d4ed8;
 
-  /* Layout width */
-  --max: 1180px;     /* page container width */
-  --content: 1020px; /* text/media width (same for images/grids/code) */
+  --max: 1180px;
+  --content: 1020px;
 
   --radius: 18px;
 
@@ -22,7 +21,7 @@
 
 html{
   scroll-behavior: smooth;
-  scroll-padding-top: 88px; /* for sticky header + anchor jumps */
+  scroll-padding-top: 96px;
 }
 
 body{
@@ -53,7 +52,7 @@ body{
 }
 .skip:focus{ left: 12px; }
 
-/* Header */
+/* Sticky header */
 .header{
   position: sticky;
   top: 0;
@@ -64,21 +63,46 @@ body{
   transition: box-shadow .18s ease, background .18s ease;
 }
 
-.headerWrap{ padding-top: 18px; padding-bottom: 14px; transition: padding .18s ease; }
+.headerWrap{
+  padding-top: 16px;
+  padding-bottom: 12px;
+}
 
+/* Key fix: do NOT use display:none (causes jump). Use max-height + opacity */
 .top{
   display: flex;
   gap: 18px;
   align-items: flex-start;
   justify-content: space-between;
   flex-wrap: wrap;
+
+  overflow: hidden;
+  max-height: 260px;
+  opacity: 1;
+  transition: max-height .22s ease, opacity .18s ease, margin .18s ease;
+}
+
+/* Compact mode */
+.header.compact{
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 10px 28px rgba(17,24,39,.10);
+}
+.header.compact .top{
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+  pointer-events: none;
 }
 
 h1{
   margin: 0;
   font-size: 36px;
-  line-height: 1.12;
+  line-height: 1.10;
   letter-spacing: -0.03em;
+  background: linear-gradient(180deg, #0f172a 0%, #111827 60%, rgba(17,24,39,.85) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .meta{
@@ -129,14 +153,7 @@ h1{
   box-shadow: 0 18px 40px rgba(37,99,235,.28);
 }
 
-/* Compact header state: hide big title/meta/actions, keep nav */
-.header.compact{
-  background: rgba(255,255,255,.92);
-  box-shadow: 0 10px 28px rgba(17,24,39,.10);
-}
-.header.compact .headerWrap{ padding-top: 10px; padding-bottom: 10px; }
-.header.compact .top{ display: none; }
-
+/* Nav */
 .nav{
   display: flex;
   gap: 10px;
@@ -170,7 +187,10 @@ h1{
   border-color: rgba(37,99,235,.20);
 }
 
-/* Content widths: make text, grids, images, code same width */
+/* Make anchor jumps look correct even with sticky header */
+.section{ scroll-margin-top: 110px; }
+
+/* Content width: text/images/grids equal */
 .section > h2,
 .section > h3,
 .section > h4,
@@ -189,7 +209,7 @@ h1{
   margin-right: auto;
 }
 
-/* Sections as “cards” (light background blocks) */
+/* Section blocks (less “stacked text”) */
 .section{
   position: relative;
   padding: 26px 0;
@@ -212,21 +232,37 @@ h1{
   background: rgba(255,255,255,.86);
 }
 
-/* Headings / text */
+/* Cooler headings */
 h2{
   margin: 0 0 12px;
   font-size: 22px;
   letter-spacing: -0.015em;
+  position: relative;
+  padding-left: 14px;
 }
+h2::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .25em;
+  bottom: .25em;
+  width: 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--accent), var(--accent2));
+}
+
 h3{
   margin: 18px 0 10px;
   font-size: 17px;
   letter-spacing: -0.01em;
+  color: #0f172a;
 }
 h4{
   margin: 18px 0 10px;
-  font-size: 15.5px;
-  letter-spacing: -0.005em;
+  font-size: 13px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgba(17,24,39,.72);
 }
 p{
   margin: 10px 0;
@@ -308,54 +344,6 @@ p{
   background: rgba(248,250,252,.85);
 }
 
-/* Gallery (if you use it) */
-.gallery{
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 14px;
-}
-
-/* Details / Callouts (if you use them) */
-.details{
-  margin-top: 14px;
-  border: 1px solid rgba(229,231,235,.9);
-  border-radius: var(--radius);
-  background: rgba(255,255,255,.95);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-}
-.details > summary{
-  cursor: pointer;
-  padding: 12px 14px;
-  font-weight: 750;
-}
-.detailsBody{
-  padding: 0 14px 14px;
-}
-.detailsBody ul{ margin: 8px 0 0 18px; }
-
-.callouts{
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 14px;
-}
-.callout{
-  border-radius: var(--radius);
-  border: 1px solid rgba(229,231,235,.9);
-  background: rgba(255,255,255,.95);
-  padding: 14px;
-  box-shadow: var(--shadow);
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-}
-.callout:hover{
-  transform: translateY(-2px);
-  box-shadow: var(--shadow2);
-  border-color: #d1d5db;
-}
-.callout p{ color: var(--muted); }
-
 /* Code blocks */
 .code{
   margin-top: 14px;
@@ -388,5 +376,5 @@ code{
 
 @media (max-width: 900px){
   h1{ font-size: 28px; }
-  .grid2, .grid3, .gallery, .callouts{ grid-template-columns: 1fr; }
+  .grid2, .grid3{ grid-template-columns: 1fr; }
 }

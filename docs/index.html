@@ -18,7 +18,7 @@
           <h1>Evaluation of Fréchet Radar Distance for Assessing Synthetic Radar Data</h1>
           <div class="meta">
             <span><b>Author:</b> Nicolas Zander</span>
-            <span><b>Institution:</b> OTH Regensburg - Aumovio</span>
+            <span><b>Institution:</b> OTH Regensburg – Aumovio</span>
           </div>
         </div>
 
@@ -33,7 +33,6 @@
         <a href="#context">Context</a>
         <a href="#method">Method</a>
         <a href="#results">Results</a>
-        <a href="#figures">Figures</a>
         <a href="#repro">Reproducibility</a>
         <a href="#citation">Citation</a>
         <a href="#acknowledgements">Acknowledgements</a>
@@ -42,6 +41,7 @@
   </header>
 
   <main id="content" class="wrap">
+
     <section class="section" id="abstract">
       <h2>Abstract</h2>
       <p>
@@ -127,18 +127,15 @@
 
       <h3>Contributions</h3>
       <p>
-        This thesis investigates the suitability of the Fréchet Radar Distance (FRD) as a
-        metric for evaluating synthetic radar data. The work focuses on validating the
-        metric in controlled experimental settings and analyzing whether it reflects
-        meaningful differences between radar data distributions. To achieve this, a
-        parameterized pseudo-radar generator is used to create datasets with known
-        distributional properties, allowing systematic testing of the metric's behavior.
-        Furthermore, the study compares FRD with an approximated log-likelihood as a
-        reference measure. Beyond the validation of the metric itself, the thesis additionally applies FRD
-        to analyze the training behavior of U-Net-based diffusion models for synthetic
-        radar generation. This provides a first structured investigation of how diffusion
-        models reproduce radar data distributions and how model capacity influences the
-        resulting data quality.
+        This thesis investigates the suitability of the Fréchet Radar Distance (FRD) as a metric for evaluating
+        synthetic radar data. The work focuses on validating the metric in controlled experimental settings and
+        analyzing whether it reflects meaningful differences between radar data distributions. To achieve this, a
+        parameterized pseudo-radar generator is used to create datasets with known distributional properties,
+        allowing systematic testing of the metric's behavior. Furthermore, the study compares FRD with an
+        approximated log-likelihood as a reference measure. Beyond the validation of the metric itself, the thesis
+        additionally applies FRD to analyze the training behavior of U-Net-based diffusion models for synthetic radar
+        generation. This provides a first structured investigation of how diffusion models reproduce radar data
+        distributions and how model capacity influences the resulting data quality.
       </p>
 
       <div class="grid3">
@@ -172,19 +169,17 @@
 
       <h4>Discretizing Radar Point Clouds</h4>
       <p>
-        The continuous spatial domain of the point clouds is divided into grid cells.
-        Each radar point is assigned to a grid cell such that the total Euclidean
-        distance between all points and their assigned cell centers is minimized.
-        Since each cell can contain at most one point, the assignment problem becomes
-        a linear sum assignment problem.
+        The continuous spatial domain of the point clouds is divided into grid cells. Each radar point is assigned to
+        a grid cell such that the total Euclidean distance between all points and their assigned cell centers is
+        minimized. Since each cell can contain at most one point, the assignment problem becomes a linear sum
+        assignment problem.
       </p>
 
       <p>
-        For occupied cells, the representation stores a presence indicator together
-        with the relative offset of the radar point to the center of the assigned cell.
-        By encoding this offset, the exact spatial position of the point can be
-        reconstructed. Consequently, the discretization does not lose spatial
-        information despite mapping the points onto a grid.
+        For occupied cells, the representation stores a presence indicator together with the relative offset of the
+        radar point to the center of the assigned cell. By encoding this offset, the exact spatial position of the
+        point can be reconstructed. Consequently, the discretization does not lose spatial information despite
+        mapping the points onto a grid.
       </p>
 
       <figure class="figure">
@@ -194,46 +189,57 @@
 
       <h4>Random Projections</h4>
       <p>
-        To obtain a feature space for comparing radar data distributions, the
-        discretized grids are projected using random linear mappings. The use of
-        random projections is motivated by results from compressed sensing and
-        random projection theory, which show that random mappings approximately
-        preserve geometric properties of high-dimensional data with high probability.
+        To obtain a feature space for comparing radar data distributions, the discretized grids are projected using
+        random linear mappings. The use of random projections is motivated by results from compressed sensing and
+        random projection theory, which show that random mappings approximately preserve geometric properties of
+        high-dimensional data with high probability.
       </p>
 
       <h4>Fréchet Distance</h4>
       <p>
-        For the projected features, the mean vector and covariance matrix are
-        estimated for each dataset. The Fréchet Radar Distance (FRD) then measures
-        the difference between two datasets by computing the Fréchet distance
+        For the projected features, the mean vector and covariance matrix are estimated for each dataset. The Fréchet
+        Radar Distance (FRD) then measures the difference between two datasets by computing the Fréchet distance
         between the corresponding Gaussian distributions defined by these statistics.
       </p>
 
       <h3>Validation setup</h3>
       <p>
-        High-level pipeline: two different pseudo-radar point clouds → compute FRD → compute reference metric → compare FRD and reference.
+        High-level pipeline: two different pseudo-radar point clouds → compute FRD → compute reference metric →
+        compare FRD and reference.
       </p>
 
       <h4>Pseudo Radar Points</h4>
       <p>
-        To systematically evaluate the proposed metric, a parametric pseudo-radar generator
-        is used to create synthetic radar point clouds with controllable statistical
-        properties. The generator combines simple geometric primitives such as lines,
-        rectangles, and circles with additional uniform clutter to simulate typical radar
-        structures and noise patterns.
+        To systematically evaluate the proposed metric, a parametric pseudo-radar generator is used to create
+        synthetic radar point clouds with controllable statistical properties. The generator combines simple
+        geometric primitives such as lines, rectangles, and circles with additional uniform clutter to simulate
+        typical radar structures and noise patterns.
       </p>
 
       <figure class="figure">
-        <img src="static/images/PseudoRadarEinfach.png" alt="PseudoRadarPoints" loading="lazy" />
+        <img src="static/images/PseudoRadarEinfach.png" alt="Pseudo radar point clouds" loading="lazy" />
         <figcaption>Pseudo radar point clouds.</figcaption>
       </figure>
 
       <h4>Reference Metric</h4>
       <p>
-        To validate the behavior of the Fréchet Radar Distance, an approximated
-        log-likelihood under the pseudo-radar generator is used as a reference metric.
-        It provides a theoretical, sample-based measure for comparing the similarity
-        between datasets generated by different parameter configurations.
+        To validate the behavior of the Fréchet Radar Distance, an approximated log-likelihood under the pseudo-radar
+        generator is used as a reference metric. It provides a theoretical, sample-based measure for comparing the
+        similarity between datasets generated by different parameter configurations.
+      </p>
+
+      <p>
+        The likelihood is computed from estimated generator parameters, including the number of detected lines, the
+        number of points per line, and the number of clutter points. Since these quantities follow Poisson
+        distributions in the generator model, the overall log-likelihood can be expressed as a sum of Poisson
+        log-likelihood terms. A higher value indicates that the observed point cloud is more likely under the
+        corresponding generator.
+      </p>
+
+      <p>
+        This likelihood evaluates structural count variables and does not model the exact spatial distribution of
+        points within lines or clutter regions. Therefore, it serves as an approximate but useful reference measure
+        for assessing whether FRD captures meaningful differences between radar data distributions.
       </p>
 
       <figure class="figure">
@@ -243,9 +249,9 @@
 
       <h3>Diffusion Model Training</h3>
       <p>
-        U-Net-based diffusion models are trained on discretized radar grids generated from the pseudo-radar generator.
-        During training, samples are generated at different stages and evaluated using FRD to track distributional
-        convergence towards the reference radar distribution.
+        U-Net-based diffusion models are trained on discretized radar grids generated from the pseudo-radar
+        generator. During training, samples are generated at different stages and evaluated using FRD to track
+        distributional convergence towards the reference radar distribution.
       </p>
     </section>
 
@@ -254,17 +260,18 @@
 
       <h3>FRD validation</h3>
       <p>
-        The experiments show that the Fréchet Radar Distance behaves consistently in controlled pseudo-radar scenarios.
-        When comparing datasets drawn from the same generator distribution, the FRD decreases with increasing sample
-        size and approaches zero. When generator parameters are varied, the FRD increases systematically with the
-        degree of distributional change and correlates with the approximated log-likelihood reference.
+        The experiments show that the Fréchet Radar Distance behaves consistently in controlled pseudo-radar
+        scenarios. When comparing datasets drawn from the same generator distribution, the FRD decreases with
+        increasing sample size and approaches zero. When generator parameters are varied, the FRD increases
+        systematically with the degree of distributional change and correlates with the approximated log-likelihood
+        reference.
       </p>
 
       <h3>Diffusion Model Training</h3>
       <p>
-        The generated samples during training illustrate how the diffusion model gradually learns the structure of the
-        radar data distribution. Early training stages mainly produce noisy point clouds, while later stages increasingly
-        reconstruct the characteristic sparse line structures produced by the pseudo-radar generator.
+        The generated samples during training illustrate how the diffusion model gradually learns the structure of
+        the radar data distribution. Early training stages mainly produce noisy point clouds, while later stages
+        increasingly reconstruct the characteristic sparse line structures produced by the pseudo-radar generator.
       </p>
 
       <figure class="figure">
@@ -273,8 +280,9 @@
       </figure>
 
       <p>
-        FRD is computed for samples generated throughout training. The decreasing FRD indicates that the distribution of
-        generated samples becomes progressively closer to the target radar data distribution.
+        To quantify this improvement, the Fréchet Radar Distance (FRD) is computed for samples generated throughout
+        training. The decreasing FRD indicates that the distribution of generated samples becomes progressively
+        closer to the target radar data distribution.
       </p>
 
       <figure class="figure">
@@ -316,30 +324,40 @@ python3 ./experiments/main_model_training_FRD.py --config test.json</code></pre>
         provided an important foundation for this repository and the thesis.
       </p>
       <p>
-        I would especially like to thank Dr. Jörg Reichardt for supervising this thesis and for his continuous guidance,
-        technical insights, and valuable feedback throughout the project.
+        I would especially like to thank Dr. Jörg Reichardt for supervising this thesis and for his continuous
+        guidance, technical insights, and valuable feedback throughout the project.
       </p>
     </section>
 
     <footer class="footer">
       <p>© <span id="year"></span> Nicolas Zander</p>
     </footer>
+
   </main>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Visual-only: compact header on scroll (shows mainly nav)
+    // Stable compact header (no scroll snapping)
     const header = document.getElementById("siteHeader");
-    const compactAt = 110;
+    let compact = false;
+    const COMPACT_ON = 160;
+    const COMPACT_OFF = 80;
 
     const onScroll = () => {
-      header.classList.toggle("compact", window.scrollY > compactAt);
+      const y = window.scrollY || 0;
+      if (!compact && y > COMPACT_ON) {
+        compact = true;
+        header.classList.add("compact");
+      } else if (compact && y < COMPACT_OFF) {
+        compact = false;
+        header.classList.remove("compact");
+      }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
-    // Visual-only: highlight current section in nav
+    // Active nav link highlighting
     const navLinks = Array.from(document.querySelectorAll(".nav a"));
     const sections = navLinks
       .map(a => document.querySelector(a.getAttribute("href")))
