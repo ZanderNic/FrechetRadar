@@ -338,14 +338,22 @@ python3 ./experiments/main_model_training_FRD.py --config test.json</code></pre>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Stable compact header (no scroll snapping)
+    // 1) Fix "opening/closing" near the top: increase hysteresis + small top lock
     const header = document.getElementById("siteHeader");
     let compact = false;
-    const COMPACT_ON = 160;
-    const COMPACT_OFF = 80;
+
+    const TOP_LOCK_PX = 40;   // always expanded close to top
+    const COMPACT_ON = 260;   // needs stronger scroll to collapse
+    const COMPACT_OFF = 120;  // must scroll back quite a bit to expand
 
     const onScroll = () => {
       const y = window.scrollY || 0;
+
+      if (y <= TOP_LOCK_PX) {
+        if (compact) { compact = false; header.classList.remove("compact"); }
+        return;
+      }
+
       if (!compact && y > COMPACT_ON) {
         compact = true;
         header.classList.add("compact");
@@ -354,13 +362,19 @@ python3 ./experiments/main_model_training_FRD.py --config test.json</code></pre>
         header.classList.remove("compact");
       }
     };
+
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
-    // Active nav link highlighting
+    // 2) Fix section highlighting (Method issue): pick section by scroll position (more stable than IO with nested content)
     const navLinks = Array.from(document.querySelectorAll(".nav a"));
-    const sections = navLinks
-      .map(a => document.querySelector(a.getAttribute("href")))
+    const sectionIds = navLinks
+      .map(a => a.getAttribute("href"))
+      .filter(h => h && h.startsWith("#"))
+      .map(h => h.slice(1));
+
+    const sections = sectionIds
+      .map(id => document.getElementById(id))
       .filter(Boolean);
 
     const setActive = (id) => {
@@ -372,14 +386,25 @@ python3 ./experiments/main_model_training_FRD.py --config test.json</code></pre>
       });
     };
 
-    const obs = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter(e => e.isIntersecting)
-        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visible) setActive(visible.target.id);
-    }, { rootMargin: "-35% 0px -55% 0px", threshold: [0.05, 0.1, 0.2, 0.4, 0.6] });
+    const navHeight = () => header.getBoundingClientRect().height;
 
-    sections.forEach(s => obs.observe(s));
+    const computeActiveSection = () => {
+      const y = window.scrollY || 0;
+      const offset = navHeight() + 24; // header + breathing room
+      const pos = y + offset;
+
+      // last section whose top <= pos
+      let current = sections[0]?.id || null;
+      for (const s of sections) {
+        if (s.offsetTop <= pos) current = s.id;
+        else break;
+      }
+      if (current) setActive(current);
+    };
+
+    window.addEventListener("scroll", computeActiveSection, { passive: true });
+    window.addEventListener("resize", computeActiveSection);
+    computeActiveSection();
   </script>
 </body>
 </html>
